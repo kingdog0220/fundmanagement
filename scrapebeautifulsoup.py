@@ -10,10 +10,7 @@ class ScrapeBeautifulSoup:
             return None
         return self.__parsedhtml
 
-    def __init__(self):
-        self.__parsedhtml = None
-
-    def get_html(self, url: str):
+    def __init__(self, url: str):
         res = requests.get(url)
         res.raise_for_status()
         self.__parsedhtml = bs4.BeautifulSoup(res.content, "html.parser")
@@ -29,6 +26,9 @@ class ScrapeBeautifulSoup:
 
         return element.text
 
+    def get_name(self, cssselector: str) -> str:
+        return self.select_one(cssselector)
+
     def get_company(self, cssselector: str) -> str:
         if self.__parsedhtml is None:
             raise ValueError("error-__parsedhtml is None.")
@@ -39,6 +39,9 @@ class ScrapeBeautifulSoup:
 
         cols = table[1].find_all("td")
         return cols[0].text
+
+    def get_category(self, cssselector: str) -> str:
+        return self.select_one(cssselector)
 
     def get_baseprice(self, cssselector: str) -> str:
         if self.__parsedhtml is None:
@@ -66,7 +69,10 @@ class ScrapeBeautifulSoup:
         if element is None:
             raise ValueError("error-assets element is None")
 
-        return float(element.text)
+        try:
+            return float(element.text)
+        except ValueError:
+            raise ValueError("error-assets element is ValueError")
 
     def get_allotment(self, cssselector: str) -> int:
         if self.__parsedhtml is None:
@@ -82,6 +88,16 @@ class ScrapeBeautifulSoup:
             return int(value)
         else:
             raise ValueError("error-allotment")
+
+    def get_commision(self, cssselector: str) -> float:
+        value = self.select_one(cssselector)
+        if value == "なし":
+            value = 0
+
+        try:
+            return float(value)
+        except ValueError:
+            raise ValueError("error-commision element is ValueError")
 
     def get_cost(self, cssselector: str) -> str:
         if self.__parsedhtml is None:

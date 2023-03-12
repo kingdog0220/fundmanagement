@@ -26,9 +26,6 @@ class StoppableHTTPServer(HTTPServer):
 
 
 class TestWebScraping(unittest.TestCase):
-
-    scrapebs = scrapebeautifulsoup()
-
     def setUp(self):
         # Use unittest setUp method.
         self.server = StoppableHTTPServer((HOST, PORT), SimpleHTTPRequestHandler)
@@ -38,40 +35,49 @@ class TestWebScraping(unittest.TestCase):
 
     @unittest.skip("本番サイトの構成が変わったかもしれないときに実行")
     def test_get_html(self):
-        self.scrapebs.get_html(settings.NISSAY_TOPIX_URL)
-        if self.scrapebs.parsedhtml is None:
+        scrapebs = scrapebeautifulsoup(settings.NISSAY_TOPIX_URL)
+        if scrapebs.parsedhtml is None:
             print("Target URL is None.")
+        print(scrapebs.parsedhtml)
 
-        print(self.scrapebs.parsedhtml)
-
-    def test_select_one(self):
-        self.scrapebs.get_html(self.url)
-        name = self.scrapebs.select_one(".fund-name")
+    def test_get_name(self):
+        scrapebs = scrapebeautifulsoup(self.url)
+        name = scrapebs.get_name(".fund-name")
         self.assertEquals(name, "＜購入・換金手数料なし＞ニッセイＴＯＰＩＸインデックスファンド")
 
-    def test_select_one_company(self):
-        self.scrapebs.get_html(self.url)
-        company = self.scrapebs.get_company(".tbl-data-01")
+    def test_get_company(self):
+        scrapebs = scrapebeautifulsoup(self.url)
+        company = scrapebs.get_company(".tbl-data-01")
         self.assertEquals(company, "ニッセイアセットマネジメント")
 
+    def test_get_category(self):
+        scrapebs = scrapebeautifulsoup(self.url)
+        category = scrapebs.get_category(".fund-type")
+        self.assertEquals(category, "国内株式")
+
     def test_get_baseprice(self):
-        self.scrapebs.get_html(self.url)
-        baseprice = self.scrapebs.get_baseprice(".tbl-data-01")
+        scrapebs = scrapebeautifulsoup(self.url)
+        baseprice = scrapebs.get_baseprice(".tbl-data-01")
         self.assertEquals(baseprice, "14,664円 （3/10）")
 
     def test_get_assets(self):
-        self.scrapebs.get_html(self.url)
-        assets = self.scrapebs.get_assets(".tbl-fund-summary")
+        scrapebs = scrapebeautifulsoup(self.url)
+        assets = scrapebs.get_assets(".tbl-fund-summary")
         self.assertEquals(assets, 551.25)
 
     def test_get_allotment(self):
-        self.scrapebs.get_html(self.url)
-        allotment = self.scrapebs.get_allotment(".tbl-data-01")
+        scrapebs = scrapebeautifulsoup(self.url)
+        allotment = scrapebs.get_allotment(".tbl-data-01")
         self.assertEquals(allotment, 0)
 
+    def test_get_commision(self):
+        scrapebs = scrapebeautifulsoup(self.url)
+        commision = scrapebs.get_commision(".no-fee")
+        self.assertEquals(commision, 0)
+
     def test_get_cost(self):
-        self.scrapebs.get_html(self.url)
-        cost = self.scrapebs.get_cost(".trust-fee")
+        scrapebs = scrapebeautifulsoup(self.url)
+        cost = scrapebs.get_cost(".trust-fee")
         self.assertEquals(cost, "0.154％")
 
     def tearDown(self):

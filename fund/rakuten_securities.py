@@ -43,17 +43,17 @@ class RakutenSecurities:
             settings.E_MAXIS_SLIM_EMERGING_URL,
             settings.E_MAXIS_SLIM_SP500_URL,
         ]
-        scrapebs = scrapebeautifulsoup()
+
         fundinfolist = []
         for url in url_list:
-            scrapebs.get_html(url)
-            name = scrapebs.select_one(self.css_selector_name)
+            scrapebs = scrapebeautifulsoup(url)
+            name = scrapebs.get_name(self.css_selector_name)
             company = scrapebs.get_company(self.css_selector_tbl_data)
-            category = scrapebs.select_one(self.css_selector_category)
+            category = scrapebs.get_category(self.css_selector_category)
             baseprice = scrapebs.get_baseprice(self.css_selector_tbl_data)
             assets = scrapebs.get_assets(self.css_selector_assets)
             allotment = scrapebs.get_allotment(self.css_selector_tbl_data)
-            commision = scrapebs.select_one(self.css_selector_commision)
+            commision = scrapebs.get_commision(self.css_selector_commision)
             cost = scrapebs.get_cost(self.css_selector_cost)
             fundinfo = FundInfo(
                 name, company, category, baseprice, assets, allotment, commision, cost
