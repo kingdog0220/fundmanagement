@@ -16,6 +16,11 @@ class RakutenSecurities:
     def css_selector_category(self):
         return ".fund-type"
 
+    # 純資産
+    @property
+    def css_selector_assets(self):
+        return ".tbl-fund-summary"
+
     # 買付手数料
     @property
     def css_selector_commision(self):
@@ -46,7 +51,7 @@ class RakutenSecurities:
             company = scrapebs.get_company(self.css_selector_tbl_data)
             category = scrapebs.select_one(self.css_selector_category)
             baseprice = scrapebs.get_baseprice(self.css_selector_tbl_data)
-            assets = scrapebs.get_assets(self.css_selector_tbl_data)
+            assets = scrapebs.get_assets(self.css_selector_assets)
             allotment = scrapebs.get_allotment(self.css_selector_tbl_data)
             commision = scrapebs.select_one(self.css_selector_commision)
             cost = scrapebs.get_cost(self.css_selector_cost)
