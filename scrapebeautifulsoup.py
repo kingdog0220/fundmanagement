@@ -54,16 +54,19 @@ class ScrapeBeautifulSoup:
 
         return "{}{}".format(element.text, element.nextSibling)
 
-    def get_assets(self, cssselector: str) -> str:
+    def get_assets(self, cssselector: str) -> float:
         if self.__parsedhtml is None:
             raise ValueError("error-__parsedhtml is None.")
 
-        table = self.__parsedhtml.select(cssselector)
+        table = self.__parsedhtml.select_one(cssselector)
         if table is None:
             raise ValueError("error-cssselector is None")
 
-        cols = table[1].find_all("td")
-        return cols[1].text
+        element = table.find("span", attrs={"class", "value-02"})
+        if element is None:
+            raise ValueError("error-assets element is None")
+
+        return float(element.text)
 
     def get_allotment(self, cssselector: str) -> int:
         if self.__parsedhtml is None:

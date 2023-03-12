@@ -61,8 +61,8 @@ class TestWebScraping(unittest.TestCase):
 
     def test_get_assets(self):
         self.scrapebs.get_html(self.url)
-        assets = self.scrapebs.get_assets(".tbl-data-01")
-        self.assertEquals(assets, "551.25億円")
+        assets = self.scrapebs.get_assets(".tbl-fund-summary")
+        self.assertEquals(assets, 551.25)
 
     def test_get_allotment(self):
         self.scrapebs.get_html(self.url)
