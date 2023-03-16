@@ -1,6 +1,5 @@
-from fundinfo import FundInfo
-
 import settings
+from fund.fundinfo import FundInfo
 from scrapebeautifulsoup import ScrapeBeautifulSoup as scrapebeautifulsoup
 
 
