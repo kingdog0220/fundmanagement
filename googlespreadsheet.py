@@ -11,10 +11,15 @@ class GoogleSpreadSheet:
 
     __workbook: gspread.Spreadsheet
 
+    @property
+    def workbook(self):
+        return self.__workbook
+
     scopes = [
         settings.GOOGLE_SPREAD_API,
         settings.GOOGLE_DRIVE_API,
     ]
+    scope = " ".join(scopes)
 
     # 列位置
     NAME = 0
@@ -29,10 +34,8 @@ class GoogleSpreadSheet:
 
     def __init__(self):
         # 認証情報の設定
-        # なぜか第二引数がArgument of type "list[str]" cannot be assigned to parameter "scopes" of type "str" in function "from_json_keyfile_name"
-        # "list[str]" is incompatible with "str"となるため、型を無視する
         self.__credentials = ServiceAccountCredentials.from_json_keyfile_name(
-            auth.JSON_KEY_FILE_PATH, self.scopes  # type: ignore
+            auth.JSON_KEY_FILE_PATH, self.scope
         )
 
         # Googleスプレッドシートの取得
@@ -48,7 +51,7 @@ class GoogleSpreadSheet:
         for fund in fund_info_list:
             # linterがアホなので
             cell_list = worksheet.range(currentRow, self.NAME + 1, currentRow, self.BEFORE_ASEETS + 1)  # type: ignore
-            # 純資産は前回純資産にコピーしてから
+
             cell_list[self.NAME].value = fund.name
             cell_list[self.COMPANY].value = fund.company
             cell_list[self.CATEGORY].value = fund.category
@@ -56,6 +59,7 @@ class GoogleSpreadSheet:
             cell_list[self.ALLOTMENT].value = fund.allotment
             cell_list[self.COMMISION].value = fund.commision
             cell_list[self.COST].value = fund.cost
+            # 純資産は前回純資産にコピーしてから
             cell_list[self.BEFORE_ASEETS].value = cell_list[self.ASEETS].value
             cell_list[self.ASEETS].value = fund.assets
 
