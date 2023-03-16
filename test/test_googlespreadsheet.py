@@ -5,9 +5,15 @@ from googlespreadsheet import GoogleSpreadSheet
 
 
 class TestGoogleSpreadSheet(unittest.TestCase):
+    def setUp(self) -> None:
+        googlespreadsheet = GoogleSpreadSheet()
+        googlespreadsheet.workbook.values_clear("'ファンドテスト'!A2:H5")
+        worksheet = googlespreadsheet.workbook.worksheet("ファンドテスト")
+        worksheet.update_cell(2, 8, 130.2)
+        worksheet.update_cell(3, 8, 100)
+
     @unittest.skip("個別に実行。書き込まれた結果を実際に確認する")
     def test_write_fundinfolist(self):
-        # 前回純資産額となる値は130.2
         fund = FundInfo(
             "日経平均投資信託",
             "大和アセットマネジメント",
@@ -38,7 +44,7 @@ class TestGoogleSpreadSheet(unittest.TestCase):
             "大和アセットマネジメント",
             "海外株式",
             "11,123円 （2/27）",
-            80,
+            115,
             0,
             0,
             "1.01％",
