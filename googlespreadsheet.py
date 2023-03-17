@@ -15,11 +15,11 @@ class GoogleSpreadSheet:
     def workbook(self):
         return self.__workbook
 
-    scopes = [
+    __scopes = [
         settings.GOOGLE_SPREAD_API,
         settings.GOOGLE_DRIVE_API,
     ]
-    scope = " ".join(scopes)
+    __scope = " ".join(__scopes)
 
     # 列位置
     NAME = 0
@@ -35,7 +35,7 @@ class GoogleSpreadSheet:
     def __init__(self):
         # 認証情報の設定
         self.__credentials = ServiceAccountCredentials.from_json_keyfile_name(
-            auth.JSON_KEY_FILE_PATH, self.scope
+            auth.JSON_KEY_FILE_PATH, self.__scope
         )
 
         # Googleスプレッドシートの取得
