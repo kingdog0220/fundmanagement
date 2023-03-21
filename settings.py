@@ -1,13 +1,13 @@
-# 楽天証券投資信託情報
-NISSAY_TOPIX_URL = "https://www.rakuten-sec.co.jp/web/fund/detail/?ID=JP90C000BRT6"
+# モーニングスター投資信託基本情報
+NISSAY_TOPIX_URL = "https://www.morningstar.co.jp/FundData/SnapShot.do?fnc=2015042708"
 TAWARA_DEVELOPED_COUNTRY_URL = (
-    "https://www.rakuten-sec.co.jp/web/fund/detail/?ID=JP90C000CMK4"
+    "https://www.morningstar.co.jp/FundData/SnapShot.do?fnc=2015121809"
 )
 E_MAXIS_SLIM_EMERGING_URL = (
-    "https://www.rakuten-sec.co.jp/web/fund/detail/?ID=JP90C000F7H5"
+    "https://www.morningstar.co.jp/FundData/SnapShot.do?fnc=2017073108"
 )
 E_MAXIS_SLIM_SP500_URL = (
-    "https://www.rakuten-sec.co.jp/web/fund/detail/?ID=JP90C000GKC6"
+    "https://www.morningstar.co.jp/FundData/SnapShot.do?fnc=2018070301"
 )
 
 # Google関連
