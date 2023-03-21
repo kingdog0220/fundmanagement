@@ -60,6 +60,6 @@ class TestGoogleSpreadSheet(unittest.TestCase):
         googlespreadsheet = GoogleSpreadSheet()
         googlespreadsheet.import_totalreturn_csv(
             "投資信託リターンテスト",
-            r"D:\src\fundmanagement\test\test_case\TotalReturn_test.csv",
+            r"D:\src\fundmanagement\test\test_case\rakuten\TotalReturn_test.csv",
             "shift-jis",
         )
