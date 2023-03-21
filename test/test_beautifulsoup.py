@@ -62,8 +62,18 @@ class TestWebScraping(unittest.TestCase):
 
     def test_get_allotment(self):
         scrapebs = scrapebeautifulsoup(self.url)
-        allotment = scrapebs.get_allotment(".table5b")
-        self.assertEquals(allotment, "2022年04月25日,0円")
+        allotments = scrapebs.get_allotments(".table5b")
+        expects = [
+            "2022年04月25日",
+            "0円",
+            "2021年04月26日",
+            "0円",
+            "2020年04月27日",
+            "0円",
+            "2019年04月25日",
+            "0円",
+        ]
+        self.assertListEqual(expects, allotments)
 
     def test_get_commision(self):
         scrapebs = scrapebeautifulsoup(self.url)

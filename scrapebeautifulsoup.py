@@ -16,7 +16,6 @@ class ScrapeBeautifulSoup:
         self.__parsedhtml = bs4.BeautifulSoup(res.content, "html.parser")
 
     def select_one(self, cssselector: str):
-        # name,category,commisionはこのメソッドで取得できる
         if self.__parsedhtml is None:
             raise ValueError("error-__parsedhtml is None.")
 
@@ -38,12 +37,14 @@ class ScrapeBeautifulSoup:
     def get_baseprice(self, cssselector: str) -> str:
         return self.select_one(cssselector).text
 
-    def get_allotment(self, cssselector: str) -> str:
+    def get_allotments(self, cssselector: str) -> list:
         element = self.select_one(cssselector)
         my_td = element.find_all("td")
-        # 分配日,分配金額で1セット
-        value = "{},{}".format(my_td[0].text, my_td[1].text)
-        return value
+        # 直近4回の分配金履歴を返却。分配日と分配金額で1セット
+        values = []
+        for value in my_td:
+            values.append(value.text)
+        return values
 
     def get_commision(self, cssselector: str) -> str:
         element = self.select_one(cssselector)
