@@ -14,3 +14,8 @@ E_MAXIS_SLIM_SP500_URL = (
 GOOGLE_SPREAD_API = "https://spreadsheets.google.com/feeds"
 GOOGLE_DRIVE_API = "https://www.googleapis.com/auth/drive"
 FUNDINFO_SHEETNAME = "ファンド"
+IMPORT_RETURN_CSV_SHEETNAME = "投資信託リターン"
+
+# ファイル操作
+CSV_DIR = r".\fund\rakuten"
+IMPORTED_FILE_DIR = r".\fund\rakuten\old"
