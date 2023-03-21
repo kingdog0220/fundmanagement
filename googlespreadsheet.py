@@ -1,4 +1,6 @@
 # Googleスプレッドシート操作
+import csv
+
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
@@ -65,3 +67,12 @@ class GoogleSpreadSheet:
 
             worksheet.update_cells(cell_list)
             currentRow += 1
+
+    def import_totalreturn_csv(
+        self, sheetname: str, filepath: str, encode: str = "shift-jis"
+    ):
+        self.__workbook.values_update(
+            sheetname,
+            params={"valueInputOption": "USER_ENTERED"},
+            body={"values": list(csv.reader(open(filepath, encoding=encode)))},
+        )
