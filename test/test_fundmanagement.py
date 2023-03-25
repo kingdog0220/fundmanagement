@@ -30,8 +30,6 @@ class TestFundManagement(unittest.TestCase):
         files = file.get_files(TEST_DIR)
         self.assertCountEqual(files, [])
 
-
-class TestWebScraping(unittest.TestCase):
     def test_convert_to_billion_exception(self):
         morningstar = MorningStar()
         with self.assertRaises(ValueError):
@@ -40,4 +38,4 @@ class TestWebScraping(unittest.TestCase):
     def test_convert_to_billion(self):
         morningstar = MorningStar()
         value = morningstar.convert_to_billion("914,754百万円")
-        self.assertEquals(value, 91.48)
+        self.assertEquals(value, 9147.54)

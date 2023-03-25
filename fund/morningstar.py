@@ -83,7 +83,7 @@ class MorningStar:
     def convert_to_billion(self, value: str) -> float:
         new_str_value = value.replace("百万円", "").replace(",", "")
         try:
-            new_value = int(new_str_value) / 10000
+            new_value = int(new_str_value) / 100
             return round(float(new_value), 2)
         except ValueError:
             raise ValueError("error-convert_to_billion method is ValueError")
