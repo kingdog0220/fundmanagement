@@ -1,6 +1,11 @@
 # BeautifulSoup4を使用したスクレイピング
 import bs4
-import requests
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
+from webdriver_manager.chrome import ChromeDriverManager
 
 
 class ScrapeBeautifulSoup:
@@ -11,9 +16,20 @@ class ScrapeBeautifulSoup:
         return self.__parsedhtml
 
     def __init__(self, url: str):
-        res = requests.get(url)
-        res.raise_for_status()
-        self.__parsedhtml = bs4.BeautifulSoup(res.content, "html.parser")
+        # ヘッドレスモードで起動
+        options = Options()
+        options.add_argument("--headless")
+        # 常に最新バージョンのChromeDriverをダウンロードして自動的に使用
+        driver = webdriver.Chrome(
+            ChromeDriverManager().install(), chrome_options=options
+        )
+        driver.get(url)
+        wait = WebDriverWait(driver, 10)
+        wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "#graph21 div")))
+        rendered_html = driver.page_source
+        driver.quit()
+
+        self.__parsedhtml = bs4.BeautifulSoup(rendered_html, "html.parser")
 
     def select_one(self, cssselector: str):
         if self.__parsedhtml is None:
@@ -40,7 +56,7 @@ class ScrapeBeautifulSoup:
     def get_allotments(self, cssselector: str) -> list:
         element = self.select_one(cssselector)
         my_td = element.find_all("td")
-        # 直近4回の分配金履歴を返却。分配日と分配金額で1セット
+        # 分配金履歴を返却。分配日と分配金額で1セット
         values = []
         for value in my_td:
             values.append(value.text)
@@ -55,6 +71,7 @@ class ScrapeBeautifulSoup:
     def get_cost(self, cssselector: str) -> str:
         element = self.select_one(cssselector)
         my_div = element.find_all("div")
+        # 2つ目の要素が信託報酬率
         value = my_div[3].text.strip()
         return value
 
