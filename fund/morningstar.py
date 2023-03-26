@@ -1,6 +1,6 @@
 import settings
 from fund.fundinfo import FundInfo
-from scrapebeautifulsoup import ScrapeBeautifulSoup as scrapebeautifulsoup
+from scrape import Scrape as scrape
 
 
 class MorningStar:
@@ -59,16 +59,16 @@ class MorningStar:
 
         fundinfolist = []
         for url in url_list:
-            scrapebs = scrapebeautifulsoup(url)
-            name = scrapebs.get_name(self.css_selector_name)
-            company = scrapebs.get_company(self.css_selector_comp)
-            category = scrapebs.get_category(self.css_selector_category)
-            baseprice = scrapebs.get_baseprice(self.css_selector_baseprice)
-            basedate = scrapebs.get_basedate(self.css_selector_basedate)
-            allotments = scrapebs.get_allotments(self.css_selector_allotment)
-            commision = scrapebs.get_commision(self.css_selector_commision)
-            cost = scrapebs.get_cost(self.css_selector_cost)
-            assets = scrapebs.get_assets(self.css_selector_assets)
+            scraped = scrape(url)
+            name = scraped.get_name(self.css_selector_name)
+            company = scraped.get_company(self.css_selector_comp)
+            category = scraped.get_category(self.css_selector_category)
+            baseprice = scraped.get_baseprice(self.css_selector_baseprice)
+            basedate = scraped.get_basedate(self.css_selector_basedate)
+            allotments = scraped.get_allotments(self.css_selector_allotment)
+            commision = scraped.get_commision(self.css_selector_commision)
+            cost = scraped.get_cost(self.css_selector_cost)
+            assets = scraped.get_assets(self.css_selector_assets)
             # 加工が必要な項目（会社、分配金、純資産）
             company_alt = company.replace("投信会社名：", "")
             allotment_alt = allotments[1]

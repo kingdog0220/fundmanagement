@@ -3,7 +3,7 @@ import unittest
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 
 import settings
-from scrapebeautifulsoup import ScrapeBeautifulSoup as scrapebeautifulsoup
+from scrape import Scrape as scrape
 
 HOST = "localhost"
 PORT = 8888
@@ -35,39 +35,39 @@ class TestWebScraping(unittest.TestCase):
 
     @unittest.skip("本番サイトの構成が変わったかもしれないときに実行")
     def test_get_html(self):
-        scrapebs = scrapebeautifulsoup(settings.NISSAY_TOPIX_URL)
-        if scrapebs.parsedhtml is None:
+        scraped = scrape(settings.NISSAY_TOPIX_URL)
+        if scraped.parsedhtml is None:
             print("Target URL is None.")
-        print(scrapebs.parsedhtml)
+        print(scraped.parsedhtml)
 
     def test_get_name(self):
-        scrapebs = scrapebeautifulsoup(self.url)
-        name = scrapebs.get_name(".fundname")
+        scraped = scrape(self.url)
+        name = scraped.get_name(".fundname")
         self.assertEquals(name, "eMAXIS Slim全世界株式（オール･カントリー）")
 
     def test_get_company(self):
-        scrapebs = scrapebeautifulsoup(self.url)
-        company = scrapebs.get_company(".comp")
+        scraped = scrape(self.url)
+        company = scraped.get_company(".comp")
         self.assertEquals(company, "投信会社名：三菱UFJ国際投信")
 
     def test_get_category(self):
-        scrapebs = scrapebeautifulsoup(self.url)
-        category = scrapebs.get_category(".fcate")
+        scraped = scrape(self.url)
+        category = scraped.get_category(".fcate")
         self.assertEquals(category, "国際株式・グローバル・含む日本（F）")
 
     def test_get_baseprice(self):
-        scrapebs = scrapebeautifulsoup(self.url)
-        baseprice = scrapebs.get_baseprice(".fprice")
+        scraped = scrape(self.url)
+        baseprice = scraped.get_baseprice(".fprice")
         self.assertEquals(baseprice, "16,522")
 
     def test_get_basedate(self):
-        scrapebs = scrapebeautifulsoup(self.url)
-        baseprice = scrapebs.get_baseprice(".ptdate")
+        scraped = scrape(self.url)
+        baseprice = scraped.get_baseprice(".ptdate")
         self.assertEquals(baseprice, "2023年03月17日")
 
     def test_get_allotment(self):
-        scrapebs = scrapebeautifulsoup(self.url)
-        allotments = scrapebs.get_allotments(".table5b")
+        scraped = scrape(self.url)
+        allotments = scraped.get_allotments(".table5b")
         expects = [
             "2022年04月25日",
             "0円",
@@ -81,18 +81,18 @@ class TestWebScraping(unittest.TestCase):
         self.assertListEqual(expects, allotments)
 
     def test_get_commision(self):
-        scrapebs = scrapebeautifulsoup(self.url)
-        commision = scrapebs.get_commision(".table1b")
+        scraped = scrape(self.url)
+        commision = scraped.get_commision(".table1b")
         self.assertEquals(commision, "0円")
 
     def test_get_cost(self):
-        scrapebs = scrapebeautifulsoup(self.url)
-        cost = scrapebs.get_cost("#graph21")
+        scraped = scrape(self.url)
+        cost = scraped.get_cost("#graph21")
         self.assertEquals(cost, "0.11%")
 
     def test_get_assets(self):
-        scrapebs = scrapebeautifulsoup(self.url)
-        assets = scrapebs.get_assets(".price2")
+        scraped = scrape(self.url)
+        assets = scraped.get_assets(".price2")
         self.assertEquals(assets, "914,754百万円")
 
     def tearDown(self):

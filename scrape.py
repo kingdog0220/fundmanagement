@@ -1,4 +1,4 @@
-# BeautifulSoup4を使用したスクレイピング
+# BeautifulSoup4とSeleniumを使用したスクレイピング
 import bs4
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -8,7 +8,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 
 
-class ScrapeBeautifulSoup:
+class Scrape:
     @property
     def parsedhtml(self):
         if self.__parsedhtml is None:
