@@ -31,7 +31,7 @@ class TestGoogleSpreadSheet(unittest.TestCase):
         googlespreadsheet = GoogleSpreadSheet()
         googlespreadsheet.write_fundinfolist("ファンドテスト", [fund])
 
-    # @unittest.skip("個別に実行。書き込まれた結果を実際に確認する")
+    @unittest.skip("個別に実行。書き込まれた結果を実際に確認する")
     def test_write_fundinfolists(self):
         fund1 = FundInfo(
             "日経平均投資信託1",
