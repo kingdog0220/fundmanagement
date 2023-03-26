@@ -60,6 +60,11 @@ class TestWebScraping(unittest.TestCase):
         baseprice = scrapebs.get_baseprice(".fprice")
         self.assertEquals(baseprice, "16,522")
 
+    def test_get_basedate(self):
+        scrapebs = scrapebeautifulsoup(self.url)
+        baseprice = scrapebs.get_baseprice(".ptdate")
+        self.assertEquals(baseprice, "2023年03月17日")
+
     def test_get_allotment(self):
         scrapebs = scrapebeautifulsoup(self.url)
         allotments = scrapebs.get_allotments(".table5b")

@@ -24,6 +24,11 @@ class MorningStar:
     def css_selector_baseprice(self):
         return ".fprice"
 
+    # 基準日
+    @property
+    def css_selector_basedate(self):
+        return ".ptdate"
+
     # 直近分配金
     @property
     def css_selector_allotment(self):
@@ -59,6 +64,7 @@ class MorningStar:
             company = scrapebs.get_company(self.css_selector_comp)
             category = scrapebs.get_category(self.css_selector_category)
             baseprice = scrapebs.get_baseprice(self.css_selector_baseprice)
+            basedate = scrapebs.get_basedate(self.css_selector_basedate)
             allotments = scrapebs.get_allotments(self.css_selector_allotment)
             commision = scrapebs.get_commision(self.css_selector_commision)
             cost = scrapebs.get_cost(self.css_selector_cost)
@@ -72,6 +78,7 @@ class MorningStar:
                 company_alt,
                 category,
                 baseprice + "円",
+                basedate,
                 allotment_alt,
                 commision,
                 cost,

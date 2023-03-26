@@ -53,6 +53,10 @@ class ScrapeBeautifulSoup:
     def get_baseprice(self, cssselector: str) -> str:
         return self.select_one(cssselector).text
 
+    def get_basedate(self, cssselector: str) -> str:
+        # 2つあるが最初の1つ目が欲しい情報なのでこれでOK
+        return self.select_one(cssselector).text
+
     def get_allotments(self, cssselector: str) -> list:
         element = self.select_one(cssselector)
         my_td = element.find_all("td")
