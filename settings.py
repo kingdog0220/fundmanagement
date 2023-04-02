@@ -9,6 +9,7 @@ E_MAXIS_SLIM_EMERGING_URL = (
 E_MAXIS_SLIM_SP500_URL = (
     "https://www.rakuten-sec.co.jp/web/fund/detail/?ID=JP90C000GKC6"
 )
+RAKUTEN_LOGIN_URL = "https://www.rakuten-sec.co.jp"
 
 # Google関連
 GOOGLE_SPREAD_API = "https://spreadsheets.google.com/feeds"

@@ -1,3 +1,8 @@
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
+
+import auth
 import settings
 from fund.fundinfo import FundInfo
 from scrapebeautifulsoup import ScrapeBeautifulSoup as scrapebeautifulsoup
@@ -62,6 +67,19 @@ class RakutenSecurities:
         return fundinfolist
 
     def Login(self):
-        url = "https://www.rakuten-sec.co.jp"
+        url = settings.RAKUTEN_LOGIN_URL
         driver = SeleniumLauncher()
         driver.get(url)
+        wait = WebDriverWait(driver, 10)
+        wait.until(
+            EC.presence_of_element_located((By.CLASS_NAME, "s3-form-login__login"))
+        )
+        # ユーザー名とパスワードを入力
+        login_id = driver.find_element(By.ID, "form-login-id")
+        password = driver.find_element(By.ID, "form-login-pass")
+
+        login_id.send_keys(auth.RAKUTEN_LOGIN_ID)
+        password.send_keys(auth.RAKUTEN_PASSWORD)
+
+        login_button = driver.find_element(By.ID, "login-btn")
+        login_button.click()
