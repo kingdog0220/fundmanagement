@@ -1,6 +1,7 @@
 import settings
 from fund.fundinfo import FundInfo
 from scrapebeautifulsoup import ScrapeBeautifulSoup as scrapebeautifulsoup
+from seleniumlauncher import SeleniumLauncher
 
 
 class RakutenSecurities:
@@ -59,3 +60,8 @@ class RakutenSecurities:
             )
             fundinfolist.append(fundinfo)
         return fundinfolist
+
+    def Login(self):
+        url = "https://www.rakuten-sec.co.jp"
+        driver = SeleniumLauncher()
+        driver.get(url)

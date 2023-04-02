@@ -5,11 +5,13 @@ import file
 import settings
 from fund.rakuten_securities import RakutenSecurities
 from googlespreadsheet import GoogleSpreadSheet
+from seleniumlauncher import SeleniumLauncher as seleniumlauncher
 
 # main
 try:
     print("START : {0:%Y/%m/%d %H:%M:%S}".format(datetime.datetime.now()))
     rakuten = RakutenSecurities()
+    rakuten.Login()
     fundinfolist = rakuten.get_fundinfolist()
     googlespreadsheet = GoogleSpreadSheet()
     googlespreadsheet.write_fundinfolist(settings.FUNDINFO_SHEETNAME, fundinfolist)
@@ -27,3 +29,7 @@ except ValueError as ex:
     print("ValueError {}".format(ex))
 except Exception:
     print("Exception")
+finally:
+    if seleniumlauncher.driver is not None:
+        if seleniumlauncher.driver:
+            seleniumlauncher.driver.quit
