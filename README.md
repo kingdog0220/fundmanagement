@@ -1,0 +1,4 @@
+# fundmanagement
+
+自分用。
+投資信託の情報をWebから取得して、GoogleSpreadSheetに書き込むPythonのプログラム
