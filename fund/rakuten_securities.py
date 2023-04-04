@@ -90,7 +90,6 @@ class RakutenSecurities:
         if self.__isLogin:
             return
 
-        self.__isLogin = False
         url = settings.RAKUTEN_LOGIN_URL
         driver = SeleniumLauncher()
         driver.get(url)
@@ -181,3 +180,4 @@ class RakutenSecurities:
             time.sleep(3)
             # ログアウト時のダイアログ
             Alert(driver).accept()
+            self.__isLogin = False
