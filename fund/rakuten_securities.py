@@ -79,7 +79,14 @@ class RakutenSecurities:
             fundinfolist.append(fundinfo)
         return fundinfolist
 
-    def Login(self):
+    def get_total_return_csv(self, logout_required: bool):
+        self.login()
+        self.go_to_target_page()
+        self.download_total_return_csv()
+        if logout_required:
+            self.logout()
+
+    def login(self):
         if self.__isLogin:
             return
 
@@ -107,7 +114,7 @@ class RakutenSecurities:
 
     def go_to_target_page(self):
         if not self.__isLogin:
-            self.Login()
+            self.login()
 
         driver = SeleniumLauncher()
         wait = WebDriverWait(driver, 10)
@@ -143,7 +150,7 @@ class RakutenSecurities:
 
     def download_total_return_csv(self):
         if not self.__isLogin:
-            self.Login()
+            self.login()
             self.go_to_target_page()
 
         driver = SeleniumLauncher()

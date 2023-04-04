@@ -11,7 +11,7 @@ from seleniumlauncher import SeleniumLauncher as seleniumlauncher
 try:
     print("START : {0:%Y/%m/%d %H:%M:%S}".format(datetime.datetime.now()))
     rakuten = RakutenSecurities()
-    rakuten.Login()
+    rakuten.get_total_return_csv(True)
     fundinfolist = rakuten.get_fundinfolist()
     googlespreadsheet = GoogleSpreadSheet()
     googlespreadsheet.write_fundinfolist(settings.FUNDINFO_SHEETNAME, fundinfolist)
@@ -27,8 +27,8 @@ except KeyboardInterrupt:
     print("KeyboardInterruptException")
 except ValueError as ex:
     print("ValueError {}".format(ex))
-except Exception:
-    print("Exception")
+except Exception as ex:
+    print("Exception {}".format(ex))
 finally:
     if seleniumlauncher.driver is not None:
         if seleniumlauncher.driver:
