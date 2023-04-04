@@ -30,6 +30,5 @@ except ValueError as ex:
 except Exception as ex:
     print("Exception {}".format(ex))
 finally:
-    if seleniumlauncher.driver is not None:
-        if seleniumlauncher.driver:
-            seleniumlauncher.driver.quit
+    if seleniumlauncher.driver:
+        seleniumlauncher.driver.quit
