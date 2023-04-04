@@ -1,3 +1,5 @@
+import time
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
@@ -136,3 +138,19 @@ class RakutenSecurities:
                 )
             )
         )
+
+    def download_total_return_csv(self):
+        if not self.__isLogin:
+            self.Login()
+            self.go_to_target_page()
+
+        driver = SeleniumLauncher()
+        button = driver.find_element(
+            By.XPATH,
+            "//*[@id="
+            + '"str-main-inner"'
+            + "]/table/tbody/tr/td/form/div[4]/table/tbody/tr/td[2]/a/img",
+        )
+        button.click()
+        # 待機
+        time.sleep(3)
