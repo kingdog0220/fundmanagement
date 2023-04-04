@@ -1,5 +1,7 @@
 import time
 
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.alert import Alert
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
@@ -154,3 +156,21 @@ class RakutenSecurities:
         button.click()
         # 待機
         time.sleep(3)
+
+    def logout(self):
+        if self.isLogin:
+            driver = SeleniumLauncher()
+            button = driver.find_element(
+                By.CLASS_NAME,
+                "pcm-gl-s-header-logout__btn",
+            )
+            # 要素を画面内にスクロールする
+            button.location_once_scrolled_into_view
+            # 要素が表示されるまでスクロールする
+            actions = ActionChains(driver)
+            actions.move_to_element(button).perform()
+            button.click()
+            # 待機
+            time.sleep(3)
+            # ログアウト時のダイアログ
+            Alert(driver).accept()
