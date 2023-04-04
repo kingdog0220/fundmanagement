@@ -17,6 +17,7 @@ class SeleniumLauncher:
             absolute_path = os.path.abspath(settings.CSV_DIR)
             prefs = {"download.default_directory": absolute_path}
             options.add_experimental_option("prefs", prefs)
+            options.add_experimental_option("excludeSwitches", ["enable-logging"])
             # 常に最新バージョンのChromeDriverをダウンロードして自動的に使用
             cls.driver = webdriver.Chrome(
                 ChromeDriverManager().install(), chrome_options=options
