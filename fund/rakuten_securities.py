@@ -10,6 +10,12 @@ from seleniumlauncher import SeleniumLauncher
 
 
 class RakutenSecurities:
+    # ログイン状態を表すフラグ
+    __isLogin: bool
+
+    @property
+    def isLogin(self):
+        return self.__isLogin
 
     # 名称
     @property
@@ -41,6 +47,9 @@ class RakutenSecurities:
     def css_selector_tbl_data(self):
         return ".tbl-data-01"
 
+    def __init__(self):
+        self.__isLogin = False
+
     def get_fundinfolist(self) -> list:
         url_list = [
             settings.NISSAY_TOPIX_URL,
@@ -67,6 +76,10 @@ class RakutenSecurities:
         return fundinfolist
 
     def Login(self):
+        if self.__isLogin:
+            return
+
+        self.__isLogin = False
         url = settings.RAKUTEN_LOGIN_URL
         driver = SeleniumLauncher()
         driver.get(url)
@@ -83,3 +96,43 @@ class RakutenSecurities:
 
         login_button = driver.find_element(By.ID, "login-btn")
         login_button.click()
+
+        # とりあえず待機
+        wait.until(EC.presence_of_element_located((By.ID, "homeAssetsPanel")))
+        self.__isLogin = True
+
+    def go_to_target_page(self):
+        if not self.__isLogin:
+            self.Login()
+
+        driver = SeleniumLauncher()
+        wait = WebDriverWait(driver, 10)
+        # 保有商品一覧
+        asset_page = driver.find_element(
+            By.XPATH,
+            "//*[@id="
+            + '"str-container"'
+            + "]/div[2]/main/form[2]/div[2]/div[1]/div[1]/div[2]/div[1]/a[1]/span",
+        )
+        asset_page.click()
+        # トータルリターン
+        wait.until(
+            EC.presence_of_element_located(
+                (By.XPATH, "/html/body/div[1]/div/div[7]/div/ul/li[4]/a/span")
+            )
+        )
+        total_return_page = driver.find_element(
+            By.XPATH, "/html/body/div[1]/div/div[7]/div/ul/li[4]/a/span"
+        )
+        total_return_page.click()
+        # 待機
+        wait.until(
+            EC.presence_of_element_located(
+                (
+                    By.XPATH,
+                    "//*[@id="
+                    + '"str-main-inner"'
+                    + "]/table/tbody/tr/td/form/div[4]/table/tbody/tr/td[2]/a/img",
+                )
+            )
+        )
