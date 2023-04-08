@@ -6,7 +6,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
-import auth
 import settings
 from fund.fundinfo import FundInfo
 from scrapebeautifulsoup import ScrapeBeautifulSoup as scrapebeautifulsoup
@@ -101,8 +100,8 @@ class RakutenSecurities:
         login_id = driver.find_element(By.ID, "form-login-id")
         password = driver.find_element(By.ID, "form-login-pass")
 
-        login_id.send_keys(auth.RAKUTEN_LOGIN_ID)
-        password.send_keys(auth.RAKUTEN_PASSWORD)
+        login_id.send_keys(settings.RAKUTEN_LOGIN_ID)
+        password.send_keys(settings.RAKUTEN_PASSWORD)
 
         login_button = driver.find_element(By.ID, "login-btn")
         login_button.click()
