@@ -4,7 +4,6 @@ import csv
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
-import auth
 import settings
 from fund.fundinfo import FundInfo
 
@@ -37,12 +36,12 @@ class GoogleSpreadSheet:
     def __init__(self):
         # 認証情報の設定
         self.__credentials = ServiceAccountCredentials.from_json_keyfile_name(
-            auth.JSON_KEY_FILE_PATH, self.__scope
+            settings.GAS_JSON_KEY_FILE_PATH, self.__scope
         )
 
         # Googleスプレッドシートの取得
         gclient = gspread.authorize(self.__credentials)
-        self.__workbook = gclient.open_by_key(auth.SPREADSHEET_KEY)
+        self.__workbook = gclient.open_by_key(settings.GOOGLE_SPREADSHEET_KEY)
 
     def write_fundinfolist(self, sheetname: str, fund_info_list: list[FundInfo]):
         worksheet = self.__workbook.worksheet(sheetname)
