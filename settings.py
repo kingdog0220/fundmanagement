@@ -3,18 +3,17 @@ from os.path import dirname, join
 
 from dotenv import load_dotenv
 
-# 楽天証券投資信託情報
-NISSAY_TOPIX_URL = "https://www.rakuten-sec.co.jp/web/fund/detail/?ID=JP90C000BRT6"
+# 投資信託情報
+NISSAY_TOPIX_URL = "https://www.wealthadvisor.co.jp/FundData/SnapShot.do?fnc=2015042708"
 TAWARA_DEVELOPED_COUNTRY_URL = (
-    "https://www.rakuten-sec.co.jp/web/fund/detail/?ID=JP90C000CMK4"
+    "https://www.wealthadvisor.co.jp/FundData/SnapShot.do?fnc=2015121809"
 )
 E_MAXIS_SLIM_EMERGING_URL = (
-    "https://www.rakuten-sec.co.jp/web/fund/detail/?ID=JP90C000F7H5"
+    "https://www.wealthadvisor.co.jp/FundData/SnapShot.do?fnc=2017073108"
 )
 E_MAXIS_SLIM_SP500_URL = (
-    "https://www.rakuten-sec.co.jp/web/fund/detail/?ID=JP90C000GKC6"
+    "https://www.wealthadvisor.co.jp/FundData/SnapShot.do?fnc=2018070301"
 )
-RAKUTEN_LOGIN_URL = "https://www.rakuten-sec.co.jp"
 
 # Google関連
 GOOGLE_SPREAD_API = "https://spreadsheets.google.com/feeds"
@@ -25,6 +24,8 @@ IMPORT_RETURN_CSV_SHEETNAME = "投資信託リターン"
 # ファイル操作
 CSV_DIR = r".\fund\rakuten"
 IMPORTED_FILE_DIR = r".\fund\rakuten\old"
+
+RAKUTEN_LOGIN_URL = "https://www.rakuten-sec.co.jp"
 
 # 認証情報の読み込み
 dotenv_path = join(dirname(__file__), ".env")

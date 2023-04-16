@@ -4,6 +4,7 @@ import os
 import file
 import settings
 from fund.rakuten_securities import RakutenSecurities
+from fund.wealthadvisor import WealthAdvisor
 from googlespreadsheet import GoogleSpreadSheet
 from seleniumlauncher import SeleniumLauncher as seleniumlauncher
 
@@ -12,7 +13,8 @@ try:
     print("START : {0:%Y/%m/%d %H:%M:%S}".format(datetime.datetime.now()))
     rakuten = RakutenSecurities()
     rakuten.get_total_return_csv(True)
-    fundinfolist = rakuten.get_fundinfolist()
+    wealthadvisor = WealthAdvisor()
+    fundinfolist = wealthadvisor.get_fundinfolist()
     googlespreadsheet = GoogleSpreadSheet()
     googlespreadsheet.write_fundinfolist(settings.FUNDINFO_SHEETNAME, fundinfolist)
     files = file.get_files(settings.CSV_DIR)
