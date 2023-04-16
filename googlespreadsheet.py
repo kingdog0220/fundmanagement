@@ -9,7 +9,6 @@ from fund.fundinfo import FundInfo
 
 
 class GoogleSpreadSheet:
-
     __workbook: gspread.Spreadsheet
 
     @property
@@ -27,11 +26,12 @@ class GoogleSpreadSheet:
     COMPANY = 1
     CATEGORY = 2
     BASE_PRICE = 3
-    ALLOTMENT = 4
-    COMMISION = 5
-    COST = 6
-    ASEETS = 7
-    BEFORE_ASEETS = 8
+    BASE_DATE = 4
+    ALLOTMENT = 5
+    COMMISION = 6
+    COST = 7
+    ASEETS = 8
+    BEFORE_ASEETS = 9
 
     def __init__(self):
         # 認証情報の設定
@@ -57,6 +57,7 @@ class GoogleSpreadSheet:
             cell_list[self.COMPANY].value = fund.company
             cell_list[self.CATEGORY].value = fund.category
             cell_list[self.BASE_PRICE].value = fund.baseprice
+            cell_list[self.BASE_DATE].value = fund.basedate
             cell_list[self.ALLOTMENT].value = fund.allotment
             cell_list[self.COMMISION].value = fund.commision
             cell_list[self.COST].value = fund.cost
