@@ -3,6 +3,7 @@ import unittest
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 
 import settings
+from fund.wealthadvisor import WealthAdvisor
 from scrapebeautifulsoup import ScrapeBeautifulSoup as scrapebeautifulsoup
 
 HOST = "localhost"
@@ -41,44 +42,62 @@ class TestWebScraping(unittest.TestCase):
         print(scrapebs.parsedhtml)
 
     def test_get_name(self):
+        wealthadvisor = WealthAdvisor()
         scrapebs = scrapebeautifulsoup(self.url)
-        name = scrapebs.get_name(".fund-name")
-        self.assertEquals(name, "＜購入・換金手数料なし＞ニッセイＴＯＰＩＸインデックスファンド")
+        name = wealthadvisor.get_name(scrapebs)
+        self.assertEquals(name, "eMAXIS Slim全世界株式(オール･カントリー)")
 
     def test_get_company(self):
+        wealthadvisor = WealthAdvisor()
         scrapebs = scrapebeautifulsoup(self.url)
-        company = scrapebs.get_company(".tbl-data-01")
-        self.assertEquals(company, "ニッセイアセットマネジメント")
+        company = wealthadvisor.get_company(scrapebs)
+        self.assertEquals(company, "投信会社名：三菱UFJ国際投信")
 
     def test_get_category(self):
+        wealthadvisor = WealthAdvisor()
         scrapebs = scrapebeautifulsoup(self.url)
-        category = scrapebs.get_category(".fund-type")
-        self.assertEquals(category, "国内株式")
+        category = wealthadvisor.get_category(scrapebs)
+        self.assertEquals(category, "国際株式・グローバル・含む日本（F）")
 
     def test_get_baseprice(self):
+        wealthadvisor = WealthAdvisor()
         scrapebs = scrapebeautifulsoup(self.url)
-        baseprice = scrapebs.get_baseprice(".tbl-data-01")
-        self.assertEquals(baseprice, "14,664円 （3/10）")
-
-    def test_get_assets(self):
-        scrapebs = scrapebeautifulsoup(self.url)
-        assets = scrapebs.get_assets(".tbl-fund-summary")
-        self.assertEquals(assets, 551.25)
+        baseprice = wealthadvisor.get_baseprice(scrapebs)
+        self.assertEquals(baseprice, "17,375")
 
     def test_get_allotment(self):
+        wealthadvisor = WealthAdvisor()
         scrapebs = scrapebeautifulsoup(self.url)
-        allotment = scrapebs.get_allotment(".tbl-data-01")
-        self.assertEquals(allotment, 0)
+        allotments = wealthadvisor.get_allotments(scrapebs)
+        expects = [
+            "2022年04月25日",
+            "0円",
+            "2021年04月26日",
+            "0円",
+            "2020年04月27日",
+            "0円",
+            "2019年04月25日",
+            "0円",
+        ]
+        self.assertListEqual(expects, allotments)
 
     def test_get_commision(self):
+        wealthadvisor = WealthAdvisor()
         scrapebs = scrapebeautifulsoup(self.url)
-        commision = scrapebs.get_commision(".no-fee")
-        self.assertEquals(commision, 0)
+        commision = wealthadvisor.get_commision(scrapebs)
+        self.assertEquals(commision, "0円")
 
     def test_get_cost(self):
+        wealthadvisor = WealthAdvisor()
         scrapebs = scrapebeautifulsoup(self.url)
-        cost = scrapebs.get_cost(".trust-fee")
-        self.assertEquals(cost, "0.154％")
+        cost = wealthadvisor.get_cost(scrapebs)
+        self.assertEquals(cost, "0.11%")
+
+    def test_get_assets(self):
+        wealthadvisor = WealthAdvisor()
+        scrapebs = scrapebeautifulsoup(self.url)
+        assets = wealthadvisor.get_assets(scrapebs)
+        self.assertEquals(assets, "1,001,749百万円")
 
     def tearDown(self):
         # Use unittest tearDown method.
