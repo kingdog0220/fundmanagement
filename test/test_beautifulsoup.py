@@ -65,6 +65,12 @@ class TestWebScraping(unittest.TestCase):
         baseprice = wealthadvisor.get_baseprice(scrapebs)
         self.assertEquals(baseprice, "17,375")
 
+    def test_get_basedate(self):
+        wealthadvisor = WealthAdvisor()
+        scrapebs = scrapebeautifulsoup(self.url)
+        basedate = wealthadvisor.get_basedate(scrapebs)
+        self.assertEquals(basedate, "2023年04月14日")
+
     def test_get_allotment(self):
         wealthadvisor = WealthAdvisor()
         scrapebs = scrapebeautifulsoup(self.url)

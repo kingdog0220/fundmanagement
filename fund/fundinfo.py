@@ -20,6 +20,11 @@ class FundInfo:
     def baseprice(self):
         return self.__baseprice
 
+    # 基準日
+    @property
+    def basedate(self):
+        return self.__basedate
+
     # 直近分配金
     @property
     def allotment(self):
@@ -46,6 +51,7 @@ class FundInfo:
         company,
         category,
         baseprice,
+        basedate,
         allotment,
         commision,
         cost,
@@ -55,6 +61,7 @@ class FundInfo:
         self.__company = company
         self.__category = category
         self.__baseprice = baseprice
+        self.__basedate = basedate
         self.__allotment = allotment
         self.__commision = commision
         self.__cost = cost

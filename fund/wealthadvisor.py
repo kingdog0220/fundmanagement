@@ -31,6 +31,7 @@ class WealthAdvisor:
             company = self.get_company(scrapebs)
             category = self.get_category(scrapebs)
             baseprice = self.get_baseprice(scrapebs)
+            basedate = self.get_basedate(scrapebs)
             allotments = self.get_allotments(scrapebs)
             commision = self.get_commision(scrapebs)
             cost = self.get_cost(scrapebs)
@@ -45,6 +46,7 @@ class WealthAdvisor:
                 company_alt,
                 category,
                 baseprice_alt,
+                basedate,
                 allotment_alt,
                 commision,
                 cost,
@@ -64,6 +66,10 @@ class WealthAdvisor:
 
     def get_baseprice(self, scrapebs: scrapebeautifulsoup) -> str:
         return scrapebs.select_one(".fprice").text
+
+    def get_basedate(self, scrapebs: scrapebeautifulsoup) -> str:
+        # ptdateは2つあるが最初の1つ目が欲しい情報なのでこれでOK
+        return scrapebs.select_one(".ptdate").text
 
     def get_allotments(self, scrapebs: scrapebeautifulsoup) -> list:
         element = scrapebs.select_one(".table5b")
