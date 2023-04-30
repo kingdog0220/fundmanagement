@@ -9,6 +9,8 @@ import settings
 
 # シングルトンとして使い回す
 class SeleniumLauncher:
+    """Selenium操作をカスタマイズ"""
+
     driver = None
 
     def __new__(cls):

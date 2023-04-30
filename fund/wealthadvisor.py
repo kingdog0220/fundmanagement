@@ -9,7 +9,14 @@ from seleniumlauncher import SeleniumLauncher
 
 
 class WealthAdvisor:
+    """ウェルスナビのサイト"""
+
     def get_fundinfolist(self) -> list:
+        """投資信託の情報を取得する
+
+        Returns:
+            list: 投資信託の情報リスト
+        """
         url_list = [
             settings.NISSAY_TOPIX_URL,
             settings.TAWARA_DEVELOPED_COUNTRY_URL,
@@ -56,6 +63,17 @@ class WealthAdvisor:
         return fundinfolist
 
     def get_name(self, scrapebs: scrapebeautifulsoup) -> str:
+        """投資信託の商品名を取得する
+
+        Args:
+            scrapebs (scrapebeautifulsoup): BeautifulSoupによるスクレイピング
+
+        Raises:
+            ValueError: CSSセレクタやタグが取得できない
+
+        Returns:
+            str: 投資信託の商品名
+        """
         element = scrapebs.select_one(".fundnamea")
         name = element.select_one("h1")
         if name is None:
@@ -64,19 +82,59 @@ class WealthAdvisor:
         return name
 
     def get_company(self, scrapebs: scrapebeautifulsoup) -> str:
+        """投資信託の運用会社を取得する
+
+        Args:
+            scrapebs (scrapebeautifulsoup): BeautifulSoupによるスクレイピング
+
+        Returns:
+            str: 投資信託の運用会社
+        """
         return scrapebs.select_one(".comp").text
 
     def get_category(self, scrapebs: scrapebeautifulsoup) -> str:
+        """投資信託の商品分類を取得する
+
+        Args:
+            scrapebs (scrapebeautifulsoup): BeautifulSoupによるスクレイピング
+
+        Returns:
+            str: 投資信託の商品分類
+        """
         return scrapebs.select_one(".fcate").text
 
     def get_baseprice(self, scrapebs: scrapebeautifulsoup) -> str:
+        """投資信託の基準価額を取得する
+
+        Args:
+            scrapebs (scrapebeautifulsoup): BeautifulSoupによるスクレイピング
+
+        Returns:
+            str: 投資信託の基準価額
+        """
         return scrapebs.select_one(".fprice").text
 
     def get_basedate(self, scrapebs: scrapebeautifulsoup) -> str:
+        """投資信託の基準日(基準価額算出日)を取得する
+
+        Args:
+            scrapebs (scrapebeautifulsoup): BeautifulSoupによるスクレイピング
+
+        Returns:
+            str: 投資信託の基準日
+        """
         # ptdateは2つあるが最初の1つ目が欲しい情報なのでこれでOK
         return scrapebs.select_one(".ptdate").text
 
     def get_allotments(self, scrapebs: scrapebeautifulsoup) -> list:
+        """投資信託の分配金履歴を取得する
+
+        Args:
+            scrapebs (scrapebeautifulsoup): BeautifulSoupによるスクレイピング
+
+        Returns:
+            list: 投資信託の分配金履歴
+        """
         element = scrapebs.select_one(".table5b")
         my_td = element.find_all("td")
         # 分配金履歴を返却。分配日と分配金額で1セット
@@ -86,12 +144,28 @@ class WealthAdvisor:
         return values
 
     def get_commision(self, scrapebs: scrapebeautifulsoup) -> str:
+        """投資信託の買付手数料を取得する
+
+        Args:
+            scrapebs (scrapebeautifulsoup): BeautifulSoupによるスクレイピング
+
+        Returns:
+            str: 投資信託の買付手数料
+        """
         element = scrapebs.select_one(".table1b")
         my_td = element.find_all("td")
         # 5行目が買付手数料
         return my_td[4].text
 
     def get_cost(self, scrapebs: scrapebeautifulsoup) -> str:
+        """投資信託の信託報酬率を取得する
+
+        Args:
+            scrapebs (scrapebeautifulsoup): BeautifulSoupによるスクレイピング
+
+        Returns:
+            str: 投資信託の信託報酬率
+        """
         element = scrapebs.select_one("#graph21")
         my_div = element.find_all("div")
         # 2つ目の要素が信託報酬率
@@ -99,9 +173,28 @@ class WealthAdvisor:
         return value
 
     def get_assets(self, scrapebs: scrapebeautifulsoup) -> str:
+        """投資信託の純資産額を取得する
+
+        Args:
+            scrapebs (scrapebeautifulsoup): BeautifulSoupによるスクレイピング
+
+        Returns:
+            str: 投資信託の純資産額
+        """
         return scrapebs.select_one(".price2").text
 
     def convert_to_billion(self, value: str) -> float:
+        """純資産額の単位変換(百万円⇒億円)
+
+        Args:
+            value (str): 純資産額(百万円)
+
+        Raises:
+            ValueError: 数値変換できない場合
+
+        Returns:
+            float: 純資産額(億円)
+        """
         new_str_value = value.replace("百万円", "").replace(",", "")
         try:
             new_value = int(new_str_value) / 100
