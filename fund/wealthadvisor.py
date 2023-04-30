@@ -56,7 +56,12 @@ class WealthAdvisor:
         return fundinfolist
 
     def get_name(self, scrapebs: scrapebeautifulsoup) -> str:
-        return scrapebs.select_one(".fundname").text
+        element = scrapebs.select_one(".fundnamea")
+        name = element.select_one("h1")
+        if name is None:
+            raise ValueError("error-cssselector is None")
+        name = name.text.strip()
+        return name
 
     def get_company(self, scrapebs: scrapebeautifulsoup) -> str:
         return scrapebs.select_one(".comp").text

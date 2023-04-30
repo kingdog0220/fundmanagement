@@ -24,6 +24,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width">
 
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <!--<link rel="icon" type="image/png" href="/common/img2016/favicons/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="/common/img2016/favicons/favicon-16x16.png" sizes="16x16">-->
@@ -44,6 +45,7 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script type="text/javascript" async="" src="https://cse.google.com/cse.js?cx=d5818c9edfbb54532"></script>
     <script async="" src="//www.googletagmanager.com/gtm.js?id=GTM-Z3L6"></script>
     <script src="/common/js2016/jquery-2.1.4.min.js"></script>
     <script src="/common/js2016/bootstrap.min.js"></script>
@@ -119,6 +121,7 @@
     <script type="text/javascript" src="/common/lib/graph13-c.js"></script>
     <script type="text/javascript" src="/common/lib/graph21-c.js"></script>
     <script type="text/javascript">
+
         //////////////////////////////////////////////////////////////
         // BODY-onloadイベントから呼び出される
         function DrawGraph()
@@ -134,6 +137,7 @@
             graph21('graph21', 'common/xml/graph/flv/flv_2018103105.xml');
         
         }
+
     </script>
     <!--=====================GRAPH (end)===============-->
 
@@ -272,21 +276,21 @@
     </script>
     <header>
         <div id="control">
-            <!--<div class="pull-right" id="google-search">
+            <div class="pull-right" id="google-search">
                 <script>
-                  (function() {
-                    var cx = '016273647790365158148:at0a7jz4ew8';
-                    var gcse = document.createElement('script');
-                    gcse.type = 'text/javascript';
-                    gcse.async = true;
-                    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-                        '//cse.google.com/cse.js?cx=' + cx;
-                    var s = document.getElementsByTagName('script')[0];
-                    s.parentNode.insertBefore(gcse, s);
-                  })();
+                    (function () {
+                        var cx = 'd5818c9edfbb54532';
+                        var gcse = document.createElement('script');
+                        gcse.type = 'text/javascript';
+                        gcse.async = true;
+                        gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+                            '//cse.google.com/cse.js?cx=' + cx;
+                        var s = document.getElementsByTagName('script')[0];
+                        s.parentNode.insertBefore(gcse, s);
+                    })();
                 </script>
                 <gcse:searchbox-only></gcse:searchbox-only>
-            </div>-->
+            </div>
             <div class="pull-right help">
                 <span id="logon-area02" style="display:none;"><a href="/portal/SSOLogout"
                         data-submenu="registar">ログアウト</a> | </span>
@@ -306,7 +310,7 @@
             <div style="clear: both"></div>
         </div>
         <div id="logo_set">
-            <p class="date" style="margin: 10px 0 0; font-size: 0.9em;"><span id="nowTime">2023/04/16 (SUN) 14:33</span>
+            <p class="date" style="margin: 10px 0 0; font-size: 0.9em;"><span id="nowTime">2023/04/30 (SUN) 08:35</span>
             </p>
             <div class="pull-left text-center" id="logo"><a href="/"><img src="/common/img2016/common/logo.png"
                         alt="logo"></a>
@@ -380,7 +384,7 @@
         </div>
 
     </header>
-    <nav class="">
+    <nav>
         <div id="grobal_nav"></div>
         <div>
             <div id="container-category">
@@ -482,8 +486,8 @@
                                 <!--ファンドを探す-->
                                 <li id="submenu-fund" class="clearfix">
                                     <ul class="dropmenu-item">
-                                        <li id="fund1" class="emptymenu"></li>
-                                        <li id="fund2"><!--ファンドを探す-->
+                                        <li id="fund1" class="emptymenu" style="display: none;"></li>
+                                        <li id="fund2" style="display: none;"><!--ファンドを探す-->
                                             <ul class="tblmenu clearfix">
                                                 <li class="icon icon6 thick"><a
                                                         href="/FundBeginner/index.html">かんたんファンド検索</a></li>
@@ -515,7 +519,7 @@
                                                 <p class="close"><a href="#">×　閉じる</a></p>
                                             </div>
                                         </li>
-                                        <li id="fund3"><!--ファンドランキング-->
+                                        <li id="fund3" style="display: none;"><!--ファンドランキング-->
                                             <ul class="tblmenu clearfix">
                                                 <li class="update">
                                                     <span class="update">毎月更新</span>
@@ -550,7 +554,7 @@
                                                 <p class="close"><a href="#">×　閉じる</a></p>
                                             </div>
                                         </li>
-                                        <li id="fund4"><!--各種データ-->
+                                        <li id="fund4" style="display: none;"><!--各種データ-->
                                             <ul class="tblmenu clearfix">
                                                 <li class="update"><span class="update">随時更新</span><a
                                                         href="/fund/menu/info.html">ファンドの変更情報</a></li>
@@ -567,8 +571,8 @@
                                                 <p class="close"><a href="#">×　閉じる</a></p>
                                             </div>
                                         </li>
-                                        <li id="fund5" class="emptymenu"><!--アナリストの視点--></li>
-                                        <li id="fund6"><!--ニュース/レポート-->
+                                        <li id="fund5" class="emptymenu" style="display: none;"><!--アナリストの視点--></li>
+                                        <li id="fund6" style="display: none;"><!--ニュース/レポート-->
                                             <ul class="tblmenu clearfix">
                                                 <li class="widemenu update icon icon4"><span
                                                         class="update">随時更新</span><a
@@ -585,7 +589,7 @@
                                                 <p class="close"><a href="#">×　閉じる</a></p>
                                             </div>
                                         </li>
-                                        <li id="fund7"><!--はじめての方へ-->
+                                        <li id="fund7" style="display: none;"><!--はじめての方へ-->
                                             <ul class="tblmenu clearfix">
                                                 <li class="icon icon6 thick"><a
                                                         href="/FundBeginner/index.html">かんたんファンド検索</a></li>
@@ -605,8 +609,8 @@
                                 <div style="clear: both"></div>
                                 <li id="submenu-stock">
                                     <ul class="dropmenu-item">
-                                        <li id="stock1" class="emptymenu"></li>
-                                        <li id="stock2"><!--株式を探す-->
+                                        <li id="stock1" class="emptymenu" style="display: none;"></li>
+                                        <li id="stock2" style="display: none;"><!--株式を探す-->
                                             <ul class="tblmenu clearfix">
                                                 <li class="icon icon15 thick"><span class="update">毎日更新</span><a
                                                         href="/StockInfo/search/">株式銘柄情報検索</a></li>
@@ -621,7 +625,7 @@
                                                 <p class="close"><a href="#">×　閉じる</a></p>
                                             </div>
                                         </li>
-                                        <li id="stock5" class="submenu-stock"><!--ニュース/レポート-->
+                                        <li id="stock5" class="submenu-stock" style="display: none;"><!--ニュース/レポート-->
                                             <p class="droptitle">■ニュース</p>
                                             <ul class="tblmenu clearfix">
                                                 <li class="icon icon18 thick"><a href="https://kabushiki.jp/"
@@ -652,8 +656,8 @@
                                                 <p class="close"><a href="#">×　閉じる</a></p>
                                             </div>
                                         </li>
-                                        <li id="stock6" class="emptymenu"><!--米国株式情報--></li>
-                                        <li id="stock7"><!--はじめての方へ-->
+                                        <li id="stock6" class="emptymenu" style="display: none;"><!--米国株式情報--></li>
+                                        <li id="stock7" style="display: none;"><!--はじめての方へ-->
                                             <ul class="tblmenu clearfix">
                                                 <li class="icon icon6 thick"><a
                                                         href="/moneyschool/stock/chapter01.html">株式講座　初級編</a></li>
@@ -672,8 +676,8 @@
                                 </li>
                                 <li id="submenu-etf">
                                     <ul class="dropmenu-item">
-                                        <li id="etf1" class="emptymenu"><!--ETFホーム--></li>
-                                        <li id="etf2">
+                                        <li id="etf1" class="emptymenu" style="display: none;"><!--ETFホーム--></li>
+                                        <li id="etf2" style="display: none;">
                                             <ul class="tblmenu clearfix"> <!--ETFについて-->
                                                 <li><a href="/etf/contents/aboutetf.html#1">ETFって何？</a></li>
                                                 <li><a href="/etf/contents/merit.html">ETFのメリット</a></li>
@@ -685,10 +689,10 @@
                                                 <p class="close"><a href="#">×　閉じる</a></p>
                                             </div>
                                         </li>
-                                        <li id="etf3" class="emptymenu"><!--国内ETF情報--></li>
-                                        <li id="etf4" class="emptymenu"><!--海外ETF情報--></li>
-                                        <li id="etf5" class="emptymenu"><!--海外ETF検索--></li>
-                                        <li id="etf6"><!--ETFランキング-->
+                                        <li id="etf3" class="emptymenu" style="display: none;"><!--国内ETF情報--></li>
+                                        <li id="etf4" class="emptymenu" style="display: none;"><!--海外ETF情報--></li>
+                                        <li id="etf5" class="emptymenu" style="display: none;"><!--海外ETF検索--></li>
+                                        <li id="etf6" style="display: none;"><!--ETFランキング-->
                                             <ul class="tblmenu clearfix">
                                                 <li class="widemenu update icon icon10">
                                                     <span class="update">毎月更新</span>
@@ -704,13 +708,14 @@
                                             </div>
                                         </li>
 
-                                        <li id="etf7" class="emptymenu"><!--ETFニュース--></li>
+                                        <li id="etf7" class="emptymenu" style="display: none;"><!--ETFニュース--></li>
                                     </ul>
                                 </li>
                                 <li id="submenu-marketinfo">
                                     <ul class="dropmenu-item">
-                                        <li id="marketinfo1" class="emptymenu"><!--マーケット情報ホーム--></li>
-                                        <li id="marketinfo2"><!--マーケットニュース-->
+                                        <li id="marketinfo1" class="emptymenu" style="display: none;"><!--マーケット情報ホーム-->
+                                        </li>
+                                        <li id="marketinfo2" style="display: none;"><!--マーケットニュース-->
                                             <ul class="tblmenu clearfix">
                                                 <li><span class="update">随時更新</span><a
                                                         href="/market/fund.html">ファンドニュース</a></li>
@@ -730,9 +735,9 @@
                                                 <p class="close"><a href="#">×　閉じる</a></p>
                                             </div>
                                         </li>
-                                        <li id="marketinfo3" class="emptymenu"><!--為替情報--></li>
-                                        <li id="marketinfo4" class="emptymenu"><!--株式情報--></li>
-                                        <li id="marketinfo5"><!--各種指標/データ-->
+                                        <li id="marketinfo3" class="emptymenu" style="display: none;"><!--為替情報--></li>
+                                        <li id="marketinfo4" class="emptymenu" style="display: none;"><!--株式情報--></li>
+                                        <li id="marketinfo5" style="display: none;"><!--各種指標/データ-->
                                             <ul class="tblmenu clearfix">
                                                 <li class="update">
                                                     <span class="update">毎日更新</span>
@@ -753,25 +758,26 @@
                                                 <p class="close"><a href="#">×　閉じる</a></p>
                                             </div>
                                         </li>
-                                        <li id="marketinfo6" class="emptymenu"><!--ビデオレポート--></li>
+                                        <li id="marketinfo6" class="emptymenu" style="display: none;"><!--ビデオレポート-->
+                                        </li>
                                     </ul>
                                 </li>
                                 <li id="submenu-company">
                                     <ul class="dropmenu-item">
-                                        <li id="company1"><!--ユーザー情報登録--></li>
-                                        <li id="company2"><!--ログインページ変更--></li>
-                                        <li id="company3"><!--ユーザー仮登録--></li>
-                                        <li id="company4"><!--パスワード通知--></li>
-                                        <li id="company5"><!--パフォーマンス--></li>
-                                        <li id="company6"><!--増益グラフ--></li>
-                                        <li id="company7"><!--銘柄情報--></li>
-                                        <li id="company7"><!--X-RAY--></li>
-                                        <li id="company7"><!--マイビュー--></li>
-                                        <li id="company7"><!--エクスポート--></li>
-                                        <li id="company7"><!--ファンド登録--></li>
-                                        <li id="company7"><!--株式登録--></li>
-                                        <li id="company7"><!--取引修正--></li>
-                                        <li id="company7"><!--アラート設定--></li>
+                                        <li id="company1" style="display: none;"><!--ユーザー情報登録--></li>
+                                        <li id="company2" style="display: none;"><!--ログインページ変更--></li>
+                                        <li id="company3" style="display: none;"><!--ユーザー仮登録--></li>
+                                        <li id="company4" style="display: none;"><!--パスワード通知--></li>
+                                        <li id="company5" style="display: none;"><!--パフォーマンス--></li>
+                                        <li id="company6" style="display: none;"><!--増益グラフ--></li>
+                                        <li id="company7" style="display: none;"><!--銘柄情報--></li>
+                                        <li id="company7" style="display: none;"><!--X-RAY--></li>
+                                        <li id="company7" style="display: none;"><!--マイビュー--></li>
+                                        <li id="company7" style="display: none;"><!--エクスポート--></li>
+                                        <li id="company7" style="display: none;"><!--ファンド登録--></li>
+                                        <li id="company7" style="display: none;"><!--株式登録--></li>
+                                        <li id="company7" style="display: none;"><!--取引修正--></li>
+                                        <li id="company7" style="display: none;"><!--アラート設定--></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -864,36 +870,35 @@
                                         <script type="text/javascript" src="/common/data/fund_Pageviews.js"
                                             charset="UTF-8"></script>
                                         <ul>
-                                            <li style="top: 0px; left: 167.599px; position: absolute; display: block; opacity: 0.782339; z-index: 99;"
+                                            <li style="top: 0px; left: 0px; position: absolute; display: block; opacity: 1; z-index: 99;"
                                                 class="showlist">【3位】<a
-                                                    href="/FundData/SnapShot.do?fnc=2019092601">SBI・V・S&amp;P500インデックス・ファンド
-                                                    『愛称 ： SBI・V・S&amp;P500』</a></li>
+                                                    href="/FundData/SnapShot.do?fnc=2003120902">フィデリティ･USリート･ファンドB(為替ヘッジなし)</a>
+                                            </li>
                                             <li style="top: 0px; left: 0px; position: absolute;">【4位】<a
                                                     href="/FundData/SnapShot.do?fnc=2004072102">ダイワ･US-REIT･オープン(毎月決算型)Bコース(為替ヘッジなし)</a>
                                             </li>
                                             <li style="top: 0px; left: 0px; position: absolute;">【5位】<a
-                                                    href="/FundData/SnapShot.do?fnc=2003120902">フィデリティ･USリート･ファンドB(為替ヘッジなし)</a>
-                                            </li>
+                                                    href="/FundData/SnapShot.do?fnc=2019092601">SBI・V・S&amp;P500インデックス・ファンド
+                                                    『愛称 ： SBI・V・S&amp;P500』</a></li>
                                             <li style="top: 0px; left: 0px; position: absolute;">【6位】<a
                                                     href="/FundData/SnapShot.do?fnc=1999010702">インベスコ
                                                     世界厳選株式オープン＜為替ヘッジなし＞(毎月決算型) 『愛称 ： 世界のベスト』</a></li>
                                             <li style="top: 0px; left: 0px; position: absolute;">【7位】<a
-                                                    href="/FundData/SnapShot.do?fnc=2005022803">ピクテ･グローバル･インカム株式ファンド(毎月分配型)</a>
-                                            </li>
-                                            <li style="top: 0px; left: 0px; position: absolute;">【8位】<a
                                                     href="/FundData/SnapShot.do?fnc=2018103105">eMAXIS
                                                     Slim全世界株式(オール･カントリー)</a></li>
+                                            <li style="top: 0px; left: 0px; position: absolute;">【8位】<a
+                                                    href="/FundData/SnapShot.do?fnc=2005022803">ピクテ･グローバル･インカム株式ファンド(毎月分配型)</a>
+                                            </li>
                                             <li style="top: 0px; left: 0px; position: absolute;">【9位】<a
-                                                    href="/FundData/SnapShot.do?fnc=2004051801">ダイワ
-                                                    J-REITオープン(毎月分配型)</a></li>
+                                                    href="/FundData/SnapShot.do?fnc=2012052801">ひふみプラス</a></li>
                                             <li style="top: 0px; left: 0px; position: absolute;">【10位】<a
-                                                    href="/FundData/SnapShot.do?fnc=2004093002">新光 US-REITオープン 『愛称 ：
-                                                    ゼウス』</a></li>
+                                                    href="/FundData/SnapShot.do?fnc=1998040105">フィデリティ･USハイ･イールド･ファンド</a>
+                                            </li>
                                             <li style="top: 0px; left: -770px; position: absolute; display: block; opacity: 0; z-index: 98;"
                                                 class="">【1位】<a
                                                     href="/FundData/SnapShot.do?fnc=2014091602">アライアンス･バーンスタイン･米国成長株投信Dコース毎月決算型(為替ヘッジなし)予想分配金提示型</a>
                                             </li>
-                                            <li style="top: 0px; left: -602.401px; position: absolute; display: block; opacity: 0.217661; z-index: 98;"
+                                            <li style="top: 0px; left: -770px; position: absolute; display: block; opacity: 0; z-index: 98;"
                                                 class="">【2位】<a href="/FundData/SnapShot.do?fnc=2018070301">eMAXIS
                                                     Slim米国株式(S&amp;P500)</a></li>
                                         </ul>
@@ -959,7 +964,9 @@
                                             <div class="clear"></div>
 
                                             <div class="fundnamea">
-                                                <span class="fundname">eMAXIS Slim全世界株式(オール･カントリー)</span>
+                                                <h1
+                                                    style="margin: 0; padding: 0; border: none; font-size: 2.0em; display: inline;">
+                                                    eMAXIS Slim全世界株式(オール･カントリー)</h1>
                                                 <span class="fundnic"></span>
                                                 <span class="ftrate">★★★★</span>
                                             </div>
@@ -980,7 +987,7 @@
                                                         <td><span class="fprice">17,375</span>円</td>
                                                         <td>
                                                             <div class="plus fprice"><img src="/common/img/parrow.gif"
-                                                                    alt="">103<span class="fss">円</span>（0.6<span
+                                                                    alt="">282<span class="fss">円</span>（1.64<span
                                                                     class="fss">％</span>）</div>
                                                         </td>
                                                         <td class="price2">1,001,749百万円</td>
@@ -1084,7 +1091,7 @@
                                         <div class="fundsnapr">
                                             <div class="tar fundcode"><span
                                                     class="pr15">0331418A</span><span>2018103105</span></div>
-                                            <h1 class="mb5">ファンドの特色</h1>
+                                            <h2 class="mb5">ファンドの特色</h2>
 
                                             <div class="inftxt">
                                                 <p>主としてMSCIオール・カントリー・ワールド・インデックス(配当込み、円換算ベース)に連動する投資成果をめざして運用を行う。対象インデックスに採用されている日本を含む先進国および新興国の株式等(DR(預託証書)を含む)への投資を行う。原則として、為替ヘッジは行わない。4月決算。
@@ -1114,52 +1121,52 @@
                                                         style="position:absolute;overflow:hidden;left:200px;top:20px;width:150px;text-align:center;font-family:'verdana','geneva','helvetica','sans-serif';font-size:20px;color:#000000;font-weight:normal;">
                                                         安い</div>
                                                     <div
-                                                        style="position:absolute;left:36px;top:50px;width:5px;height:1px;clip:rect(0,5px,1px,0);background-color:#006097;overflow:hidden;">
+                                                        style="position:absolute;left:38px;top:50px;width:5px;height:1px;clip:rect(0,5px,1px,0);background-color:#006097;overflow:hidden;">
                                                     </div>
                                                     <div
-                                                        style="position:absolute;left:36px;top:51px;width:5px;height:1px;clip:rect(0,5px,1px,0);background-color:#006097;overflow:hidden;">
+                                                        style="position:absolute;left:38px;top:51px;width:5px;height:1px;clip:rect(0,5px,1px,0);background-color:#006097;overflow:hidden;">
                                                     </div>
                                                     <div
-                                                        style="position:absolute;left:36px;top:52px;width:5px;height:1px;clip:rect(0,5px,1px,0);background-color:#006097;overflow:hidden;">
+                                                        style="position:absolute;left:38px;top:52px;width:5px;height:1px;clip:rect(0,5px,1px,0);background-color:#006097;overflow:hidden;">
                                                     </div>
                                                     <div
-                                                        style="position:absolute;left:36px;top:53px;width:5px;height:1px;clip:rect(0,5px,1px,0);background-color:#006097;overflow:hidden;">
+                                                        style="position:absolute;left:38px;top:53px;width:5px;height:1px;clip:rect(0,5px,1px,0);background-color:#006097;overflow:hidden;">
                                                     </div>
                                                     <div
-                                                        style="position:absolute;left:36px;top:54px;width:5px;height:1px;clip:rect(0,5px,1px,0);background-color:#006097;overflow:hidden;">
+                                                        style="position:absolute;left:38px;top:54px;width:5px;height:1px;clip:rect(0,5px,1px,0);background-color:#006097;overflow:hidden;">
                                                     </div>
                                                     <div
-                                                        style="position:absolute;left:32px;top:55px;width:13px;height:1px;clip:rect(0,13px,1px,0);background-color:#006097;overflow:hidden;">
+                                                        style="position:absolute;left:34px;top:55px;width:13px;height:1px;clip:rect(0,13px,1px,0);background-color:#006097;overflow:hidden;">
                                                     </div>
                                                     <div
-                                                        style="position:absolute;left:33px;top:56px;width:11px;height:1px;clip:rect(0,11px,1px,0);background-color:#006097;overflow:hidden;">
+                                                        style="position:absolute;left:35px;top:56px;width:11px;height:1px;clip:rect(0,11px,1px,0);background-color:#006097;overflow:hidden;">
                                                     </div>
                                                     <div
-                                                        style="position:absolute;left:33px;top:57px;width:11px;height:1px;clip:rect(0,11px,1px,0);background-color:#006097;overflow:hidden;">
+                                                        style="position:absolute;left:35px;top:57px;width:11px;height:1px;clip:rect(0,11px,1px,0);background-color:#006097;overflow:hidden;">
                                                     </div>
                                                     <div
-                                                        style="position:absolute;left:34px;top:58px;width:9px;height:1px;clip:rect(0,9px,1px,0);background-color:#006097;overflow:hidden;">
+                                                        style="position:absolute;left:36px;top:58px;width:9px;height:1px;clip:rect(0,9px,1px,0);background-color:#006097;overflow:hidden;">
                                                     </div>
                                                     <div
-                                                        style="position:absolute;left:34px;top:59px;width:9px;height:1px;clip:rect(0,9px,1px,0);background-color:#006097;overflow:hidden;">
+                                                        style="position:absolute;left:36px;top:59px;width:9px;height:1px;clip:rect(0,9px,1px,0);background-color:#006097;overflow:hidden;">
                                                     </div>
                                                     <div
-                                                        style="position:absolute;left:35px;top:60px;width:7px;height:1px;clip:rect(0,7px,1px,0);background-color:#006097;overflow:hidden;">
+                                                        style="position:absolute;left:37px;top:60px;width:7px;height:1px;clip:rect(0,7px,1px,0);background-color:#006097;overflow:hidden;">
                                                     </div>
                                                     <div
-                                                        style="position:absolute;left:36px;top:61px;width:5px;height:1px;clip:rect(0,5px,1px,0);background-color:#006097;overflow:hidden;">
+                                                        style="position:absolute;left:38px;top:61px;width:5px;height:1px;clip:rect(0,5px,1px,0);background-color:#006097;overflow:hidden;">
                                                     </div>
                                                     <div
-                                                        style="position:absolute;left:36px;top:62px;width:5px;height:1px;clip:rect(0,5px,1px,0);background-color:#006097;overflow:hidden;">
+                                                        style="position:absolute;left:38px;top:62px;width:5px;height:1px;clip:rect(0,5px,1px,0);background-color:#006097;overflow:hidden;">
                                                     </div>
                                                     <div
-                                                        style="position:absolute;left:37px;top:63px;width:3px;height:1px;clip:rect(0,3px,1px,0);background-color:#006097;overflow:hidden;">
+                                                        style="position:absolute;left:39px;top:63px;width:3px;height:1px;clip:rect(0,3px,1px,0);background-color:#006097;overflow:hidden;">
                                                     </div>
                                                     <div
-                                                        style="position:absolute;left:37px;top:64px;width:3px;height:1px;clip:rect(0,3px,1px,0);background-color:#006097;overflow:hidden;">
+                                                        style="position:absolute;left:39px;top:64px;width:3px;height:1px;clip:rect(0,3px,1px,0);background-color:#006097;overflow:hidden;">
                                                     </div>
                                                     <div
-                                                        style="position:absolute;left:38px;top:65px;width:1px;height:1px;clip:rect(0,1px,1px,0);background-color:#006097;overflow:hidden;">
+                                                        style="position:absolute;left:40px;top:65px;width:1px;height:1px;clip:rect(0,1px,1px,0);background-color:#006097;overflow:hidden;">
                                                     </div>
                                                     <div
                                                         style="position:absolute;left:0px;top:66px;width:71px;height:25px;clip:rect(0,71px,25px,0);background-color:#e0e8d1;overflow:hidden;">
@@ -1396,22 +1403,22 @@
                                                 <table class="table5b mb10 mt20">
 
                                                     <tbody>
-                                                        <tr>
+                                                        <tr class="bggr">
                                                             <td>2022年04月25日</td>
                                                             <td class="tar"><span class="plus">0円</span></td>
                                                         </tr>
 
-                                                        <tr class="bggr">
+                                                        <tr>
                                                             <td>2021年04月26日</td>
                                                             <td class="tar"><span class="plus">0円</span></td>
                                                         </tr>
 
-                                                        <tr>
+                                                        <tr class="bggr">
                                                             <td>2020年04月27日</td>
                                                             <td class="tar"><span class="plus">0円</span></td>
                                                         </tr>
 
-                                                        <tr class="bggr">
+                                                        <tr>
                                                             <td>2019年04月25日</td>
                                                             <td class="tar"><span class="plus">0円</span></td>
                                                         </tr>
@@ -2947,8 +2954,7 @@
                         document.write('</div>');
 
                     </script>
-                    <div id="ad_area01" class="mb10" style="position: static; top: auto;">
-                        <!-- /11038147/MS_PC_fund_skyscraper -->
+                    <div id="ad_area01" class="mb10"><!-- /11038147/MS_PC_fund_skyscraper -->
                         <div id="div-gpt-ad-1602477102760-0" style="width: 160px; height: 600px;">
                             <script>googletag.cmd.push(function () { googletag.display("div-gpt-ad-1602477102760-0"); })</script>
                         </div>
