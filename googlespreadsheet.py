@@ -9,6 +9,8 @@ from fund.fundinfo import FundInfo
 
 
 class GoogleSpreadSheet:
+    """GoogleSpreadSheetの操作を管理する"""
+
     __workbook: gspread.Spreadsheet
 
     @property
@@ -44,6 +46,12 @@ class GoogleSpreadSheet:
         self.__workbook = gclient.open_by_key(settings.GOOGLE_SPREADSHEET_KEY)
 
     def write_fundinfolist(self, sheetname: str, fund_info_list: list[FundInfo]):
+        """投資信託の情報をシートに書き込む
+
+        Args:
+            sheetname (str): シート名
+            fund_info_list (list[FundInfo]): 投資信託の情報一覧
+        """
         worksheet = self.__workbook.worksheet(sheetname)
         if worksheet is None:
             raise ValueError("error-sheetname is None.")
@@ -71,6 +79,13 @@ class GoogleSpreadSheet:
     def import_totalreturn_csv(
         self, sheetname: str, filepath: str, encode: str = "shift-jis"
     ):
+        """リターンデータ(CSV)をインポートする
+
+        Args:
+            sheetname (str): シート名
+            filepath (str): リターンデータ(CSV)のファイルパス
+            encode (str, optional): 文字コード Defaults to "shift-jis".
+        """
         self.__workbook.values_update(
             sheetname,
             params={"valueInputOption": "USER_ENTERED"},

@@ -13,6 +13,8 @@ from seleniumlauncher import SeleniumLauncher
 
 
 class RakutenSecurities:
+    """楽天証券のサイト"""
+
     # ログイン状態を表すフラグ
     __isLogin: bool
 
@@ -24,6 +26,11 @@ class RakutenSecurities:
         self.__isLogin = False
 
     def get_total_return_csv(self, logout_required: bool):
+        """投資のリターンデータを取得する
+
+        Args:
+            logout_required (bool): 処理終了後、ログアウトする場合はtrue
+        """
         self.login()
         self.go_to_target_page()
         self.download_total_return_csv()
@@ -31,6 +38,7 @@ class RakutenSecurities:
             self.logout()
 
     def login(self):
+        """サイトにログインする"""
         if self.__isLogin:
             return
 
@@ -56,6 +64,7 @@ class RakutenSecurities:
         self.__isLogin = True
 
     def go_to_target_page(self):
+        """目的のページへ遷移する"""
         if not self.__isLogin:
             self.login()
 
@@ -92,6 +101,7 @@ class RakutenSecurities:
         )
 
     def download_total_return_csv(self):
+        """リターンデータ(CSV)をダウンロードする"""
         if not self.__isLogin:
             self.login()
             self.go_to_target_page()
@@ -108,6 +118,7 @@ class RakutenSecurities:
         time.sleep(3)
 
     def logout(self):
+        """ログアウトする"""
         if self.isLogin:
             driver = SeleniumLauncher()
             button = driver.find_element(
