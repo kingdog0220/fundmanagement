@@ -7,10 +7,10 @@ from googlespreadsheet import GoogleSpreadSheet
 class TestGoogleSpreadSheet(unittest.TestCase):
     def setUp(self) -> None:
         googlespreadsheet = GoogleSpreadSheet()
-        googlespreadsheet.workbook.values_clear("'ファンドテスト'!A2:H5")
+        googlespreadsheet.workbook.values_clear("'ファンドテスト'!A2:I5")
         worksheet = googlespreadsheet.workbook.worksheet("ファンドテスト")
-        worksheet.update_cell(2, 8, 130.2)
-        worksheet.update_cell(3, 8, 100)
+        worksheet.update_cell(2, 9, 130.2)
+        worksheet.update_cell(3, 9, 100)
 
         worksheet2 = googlespreadsheet.workbook.worksheet("投資信託リターンテスト")
         worksheet2.clear()
@@ -21,11 +21,12 @@ class TestGoogleSpreadSheet(unittest.TestCase):
             "日経平均投資信託",
             "大和アセットマネジメント",
             "国内株式",
-            "14,500円 （2/27）",
-            120.4,
+            "14,500円",
+            "2023年04月14日",
             100,
             200,
             "0.23％",
+            120.4,
         )
         googlespreadsheet = GoogleSpreadSheet()
         googlespreadsheet.write_fundinfolist("ファンドテスト", [fund])
@@ -36,21 +37,23 @@ class TestGoogleSpreadSheet(unittest.TestCase):
             "日経平均投資信託1",
             "大和アセットマネジメント",
             "国内株式",
-            "14,500円 （2/27）",
-            120.4,
+            "14,500円",
+            "2023年04月14日",
             100,
             200,
             "0.23％",
+            120.4,
         )
         fund2 = FundInfo(
             "S&P500投資信託2",
             "大和アセットマネジメント",
             "海外株式",
-            "11,123円 （2/27）",
-            115,
+            "11,123円",
+            "2023年04月14日",
             0,
             0,
             "1.01％",
+            115,
         )
         googlespreadsheet = GoogleSpreadSheet()
         googlespreadsheet.write_fundinfolist("ファンドテスト", [fund1, fund2])

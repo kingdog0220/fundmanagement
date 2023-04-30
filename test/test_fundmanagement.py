@@ -3,6 +3,7 @@ import shutil
 import unittest
 
 import file
+from fund.wealthadvisor import WealthAdvisor
 
 TEST_DIR = r"D:\src\fundmanagement\test\test_case\rakuten"
 TEST_DIR_OLD = r"D:\src\fundmanagement\test\test_case\rakuten\old"
@@ -28,3 +29,13 @@ class TestFundManagement(unittest.TestCase):
         )
         files = file.get_files(TEST_DIR)
         self.assertCountEqual(files, [])
+
+    def test_convert_to_billion_exception(self):
+        wealthadvisor = WealthAdvisor()
+        with self.assertRaises(ValueError):
+            wealthadvisor.convert_to_billion("abc")
+
+    def test_convert_to_billion(self):
+        wealthadvisor = WealthAdvisor()
+        value = wealthadvisor.convert_to_billion("914,754百万円")
+        self.assertEquals(value, 9147.54)
