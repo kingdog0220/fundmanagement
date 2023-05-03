@@ -15,6 +15,9 @@ E_MAXIS_SLIM_SP500_URL = (
     "https://www.wealthadvisor.co.jp/FundData/SnapShot.do?fnc=2018070301"
 )
 
+# 各銀行・証券会社コード値
+RAKUTEN_SECURITIES = "RKS"
+
 # Google関連
 GOOGLE_SPREAD_API = "https://spreadsheets.google.com/feeds"
 GOOGLE_DRIVE_API = "https://www.googleapis.com/auth/drive"

@@ -7,12 +7,11 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
 import settings
-from fund.fundinfo import FundInfo
-from scrapebeautifulsoup import ScrapeBeautifulSoup as scrapebeautifulsoup
+from fund.iwebsite import IWebSite
 from seleniumlauncher import SeleniumLauncher
 
 
-class RakutenSecurities:
+class RakutenSecurities(IWebSite):
     """楽天証券のサイト"""
 
     # ログイン状態を表すフラグ
@@ -24,18 +23,6 @@ class RakutenSecurities:
 
     def __init__(self):
         self.__isLogin = False
-
-    def get_total_return_csv(self, logout_required: bool):
-        """投資のリターンデータを取得する
-
-        Args:
-            logout_required (bool): 処理終了後、ログアウトする場合はtrue
-        """
-        self.login()
-        self.go_to_target_page()
-        self.download_total_return_csv()
-        if logout_required:
-            self.logout()
 
     def login(self):
         """サイトにログインする"""
@@ -62,6 +49,42 @@ class RakutenSecurities:
         # とりあえず待機
         wait.until(EC.presence_of_element_located((By.ID, "homeAssetsPanel")))
         self.__isLogin = True
+
+    def get_account_info(self):
+        """口座情報を取得する"""
+        self.get_total_return_csv(True)
+
+    def logout(self):
+        """ログアウトする"""
+        if self.isLogin:
+            driver = SeleniumLauncher()
+            button = driver.find_element(
+                By.CLASS_NAME,
+                "pcm-gl-s-header-logout__btn",
+            )
+            # 要素を画面内にスクロールする
+            button.location_once_scrolled_into_view
+            # 要素が表示されるまでスクロールする
+            actions = ActionChains(driver)
+            actions.move_to_element(button).perform()
+            button.click()
+            # 待機
+            time.sleep(3)
+            # ログアウト時のダイアログ
+            Alert(driver).accept()
+            self.__isLogin = False
+
+    def get_total_return_csv(self, logout_required: bool):
+        """投資のリターンデータを取得する
+
+        Args:
+            logout_required (bool): 処理終了後、ログアウトする場合はtrue
+        """
+        self.login()
+        self.go_to_target_page()
+        self.download_total_return_csv()
+        if logout_required:
+            self.logout()
 
     def go_to_target_page(self):
         """目的のページへ遷移する"""
@@ -116,23 +139,3 @@ class RakutenSecurities:
         button.click()
         # 待機
         time.sleep(3)
-
-    def logout(self):
-        """ログアウトする"""
-        if self.isLogin:
-            driver = SeleniumLauncher()
-            button = driver.find_element(
-                By.CLASS_NAME,
-                "pcm-gl-s-header-logout__btn",
-            )
-            # 要素を画面内にスクロールする
-            button.location_once_scrolled_into_view
-            # 要素が表示されるまでスクロールする
-            actions = ActionChains(driver)
-            actions.move_to_element(button).perform()
-            button.click()
-            # 待機
-            time.sleep(3)
-            # ログアウト時のダイアログ
-            Alert(driver).accept()
-            self.__isLogin = False

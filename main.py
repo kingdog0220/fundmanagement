@@ -3,18 +3,22 @@ import os
 
 import file
 import settings
-from fund.rakuten_securities import RakutenSecurities
 from fund.wealthadvisor import WealthAdvisor
+from fund.website import WebSiteDIContainer
 from googlespreadsheet import GoogleSpreadSheet
 from seleniumlauncher import SeleniumLauncher as seleniumlauncher
 
 # main
 try:
     print("START : {0:%Y/%m/%d %H:%M:%S}".format(datetime.datetime.now()))
-    rakuten = RakutenSecurities()
-    rakuten.get_total_return_csv(True)
+    # 口座情報の取得
+    container = WebSiteDIContainer()
+    website = container.resolve(settings.RAKUTEN_SECURITIES)
+    website.get_account_info()
+    # 投資信託の基本情報取得
     wealthadvisor = WealthAdvisor()
     fundinfolist = wealthadvisor.get_fundinfolist()
+    # GoogleSpreadSheetへ書き込む
     googlespreadsheet = GoogleSpreadSheet()
     googlespreadsheet.write_fundinfolist(settings.FUNDINFO_SHEETNAME, fundinfolist)
     files = file.get_files(settings.CSV_DIR)
