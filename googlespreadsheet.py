@@ -24,6 +24,10 @@ class GoogleSpreadSheet:
     __scope = " ".join(__scopes)
 
     # 列位置
+    AMOUNT = 4
+    QUANTITY = 5
+    UPDATE_DATE = 6
+
     NAME = 0
     COMPANY = 1
     CATEGORY = 2
@@ -44,6 +48,29 @@ class GoogleSpreadSheet:
         # Googleスプレッドシートの取得
         gclient = gspread.authorize(self.__credentials)
         self.__workbook = gclient.open_by_key(settings.GOOGLE_SPREADSHEET_KEY)
+
+    def write_account_info(self, sheetname: str, account_info_dic: dict):
+        """口座情報をシートに書き込む
+
+        Args:
+            sheetname (str): シート名
+            account_info_dic (dict): 口座情報
+        """
+        worksheet = self.__workbook.worksheet(sheetname)
+        if worksheet is None:
+            raise ValueError("error-sheetname is None.")
+
+        cell = worksheet.find(account_info_dic["code"])
+        if cell is None:
+            return
+        cell_list = worksheet.range(cell.row, self.AMOUNT + 1, cell.row, self.UPDATE_DATE + 1)  # type: ignore
+        if "amount" in account_info_dic:
+            cell_list[self.AMOUNT].value = account_info_dic["amount"]
+        if "quantity" in account_info_dic:
+            cell_list[self.QUANTITY].value = account_info_dic["quantity"]
+        if "update_date" in account_info_dic:
+            cell_list[self.UPDATE_DATE].value = account_info_dic["update_date"]
+        worksheet.update_cells(cell_list)
 
     def write_fundinfolist(self, sheetname: str, fund_info_list: list[FundInfo]):
         """投資信託の情報をシートに書き込む
