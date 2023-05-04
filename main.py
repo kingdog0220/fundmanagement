@@ -20,7 +20,9 @@ try:
     fundinfolist = wealthadvisor.get_fundinfolist()
     # GoogleSpreadSheetへ書き込む
     googlespreadsheet = GoogleSpreadSheet()
-    googlespreadsheet.write_account_info("総資産", account_info_dic)
+    googlespreadsheet.write_account_info(
+        settings.TOTAL_ASSET_SHEETNAME, account_info_dic
+    )
     googlespreadsheet.write_fundinfolist(settings.FUNDINFO_SHEETNAME, fundinfolist)
     files = file.get_files(settings.CSV_DIR)
     # 1件しか取得しない想定

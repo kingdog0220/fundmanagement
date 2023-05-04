@@ -100,9 +100,9 @@ class RakutenSecurities(IWebSite):
         amount = scrapebs.select_one("#asset_total_amount")
         # データの設定
         account_info_dic = {
-            "code": self.__code,
-            "amount": amount.text,
-            "update_date": "{0:%Y/%m/%d}".format(datetime.datetime.now()),
+            settings.CODE: self.__code,
+            settings.AMOUNT: amount.text,
+            settings.UPDATE_DATE: "{0:%Y/%m/%d}".format(datetime.datetime.now()),
         }
         if logout_required:
             self.logout()
