@@ -66,7 +66,10 @@ class GoogleSpreadSheet:
             return
         cell_list = worksheet.range(cell.row, self.CODE + 1, cell.row, self.UPDATE_DATE + 1)  # type: ignore
         if settings.AMOUNT in account_info_dic:
-            cell_list[self.AMOUNT].value = account_info_dic[settings.AMOUNT]
+            num_value = round(
+                float(account_info_dic[settings.AMOUNT].replace(",", "")), 0
+            )
+            cell_list[self.AMOUNT].value = num_value
         if settings.QUANTITY in account_info_dic:
             cell_list[self.QUANTITY].value = account_info_dic[settings.QUANTITY]
         if settings.UPDATE_DATE in account_info_dic:
