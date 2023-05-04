@@ -14,7 +14,7 @@ try:
     # 口座情報の取得
     container = WebSiteDIContainer()
     website = container.resolve(settings.RAKUTEN_SECURITIES)
-    website.get_account_info()
+    account_info_dic = website.get_account_info()
     # 投資信託の基本情報取得
     wealthadvisor = WealthAdvisor()
     fundinfolist = wealthadvisor.get_fundinfolist()

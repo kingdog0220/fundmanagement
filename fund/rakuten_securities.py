@@ -1,3 +1,4 @@
+import datetime
 import time
 
 from selenium.webdriver.common.action_chains import ActionChains
@@ -8,6 +9,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 import settings
 from fund.iwebsite import IWebSite
+from scrapebeautifulsoup import ScrapeBeautifulSoup as scrapebeautifulsoup
 from seleniumlauncher import SeleniumLauncher
 
 
@@ -16,6 +18,9 @@ class RakutenSecurities(IWebSite):
 
     # ログイン状態を表すフラグ
     __isLogin: bool
+
+    # サイトのCODE
+    __code = settings.RAKUTEN_SECURITIES
 
     @property
     def isLogin(self):
@@ -50,9 +55,12 @@ class RakutenSecurities(IWebSite):
         wait.until(EC.presence_of_element_located((By.ID, "homeAssetsPanel")))
         self.__isLogin = True
 
-    def get_account_info(self):
+    def get_account_info(self) -> dict:
         """口座情報を取得する"""
+        # 口座情報取得⇒トータルリターンの取得
+        account_info_dic = self.get_amount(False)
         self.get_total_return_csv(True)
+        return account_info_dic
 
     def logout(self):
         """ログアウトする"""
@@ -73,6 +81,32 @@ class RakutenSecurities(IWebSite):
             # ログアウト時のダイアログ
             Alert(driver).accept()
             self.__isLogin = False
+
+    def get_amount(self, logout_required: bool) -> dict:
+        """口座情報を取得する
+        Args:
+            logout_required (bool): 処理終了後、ログアウトする場合はtrue
+
+        Returns:
+            dict: 口座情報のディクショナリ
+        """
+        if not self.__isLogin:
+            self.login()
+
+        driver = SeleniumLauncher()
+        wait = WebDriverWait(driver, 10)
+        wait.until(EC.presence_of_element_located((By.ID, "asset_total_amount")))
+        scrapebs = scrapebeautifulsoup(driver.current_url, driver.page_source)
+        amount = scrapebs.select_one("#asset_total_amount")
+        # データの設定
+        account_info_dic = {
+            "code": self.__code,
+            "amount": amount.text,
+            "update_date": "{0:%Y/%m/%d}".format(datetime.datetime.now()),
+        }
+        if logout_required:
+            self.logout()
+        return account_info_dic
 
     def get_total_return_csv(self, logout_required: bool):
         """投資のリターンデータを取得する
