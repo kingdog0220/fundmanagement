@@ -24,6 +24,7 @@ class GoogleSpreadSheet:
     __scope = " ".join(__scopes)
 
     # 列位置
+    CODE = 0
     AMOUNT = 4
     QUANTITY = 5
     UPDATE_DATE = 6
@@ -63,7 +64,7 @@ class GoogleSpreadSheet:
         cell = worksheet.find(account_info_dic["code"])
         if cell is None:
             return
-        cell_list = worksheet.range(cell.row, self.AMOUNT + 1, cell.row, self.UPDATE_DATE + 1)  # type: ignore
+        cell_list = worksheet.range(cell.row, self.CODE + 1, cell.row, self.UPDATE_DATE + 1)  # type: ignore
         if "amount" in account_info_dic:
             cell_list[self.AMOUNT].value = account_info_dic["amount"]
         if "quantity" in account_info_dic:
