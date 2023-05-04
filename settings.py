@@ -35,6 +35,10 @@ TOTAL_ASSET_SHEETNAME = "総資産"
 CSV_DIR = r".\fund\rakuten"
 IMPORTED_FILE_DIR = r".\fund\rakuten\old"
 
+# URL
+MUFJ_LOGIN_URL = (
+    "https://entry11.bk.mufg.jp/ibg/dfw/APLIN/loginib/login?_TRANID=AG004_001"
+)
 RAKUTEN_LOGIN_URL = "https://www.rakuten-sec.co.jp"
 
 # 認証情報の読み込み
@@ -45,3 +49,5 @@ GAS_JSON_KEY_FILE_PATH = os.environ.get("GAS_JSON_KEY_FILE_PATH")
 GOOGLE_SPREADSHEET_KEY = os.environ.get("GOOGLE_SPREADSHEET_KEY")
 RAKUTEN_LOGIN_ID = os.environ.get("RAKUTEN_LOGIN_ID")
 RAKUTEN_PASSWORD = os.environ.get("RAKUTEN_PASSWORD")
+MUFJ_CONTRACT_NUMBER = os.environ.get("MUFJ_CONTRACT_NUMBER")
+MUFJ_PASSWORD = os.environ.get("MUFJ_PASSWORD")
