@@ -19,9 +19,6 @@ class RakutenSecurities(IWebSite):
     # ログイン状態を表すフラグ
     __isLogin: bool
 
-    # サイトのCODE
-    __code = settings.RAKUTEN_SECURITIES
-
     @property
     def isLogin(self):
         return self.__isLogin
@@ -55,10 +52,10 @@ class RakutenSecurities(IWebSite):
         wait.until(EC.presence_of_element_located((By.ID, "homeAssetsPanel")))
         self.__isLogin = True
 
-    def get_account_info(self) -> dict:
+    def get_account_info(self, account_code: str) -> dict:
         """口座情報を取得する"""
         # 口座情報取得⇒トータルリターンの取得
-        account_info_dic = self.get_amount(False)
+        account_info_dic = self.get_amount(account_code, False)
         self.get_total_return_csv(True)
         return account_info_dic
 
@@ -82,7 +79,7 @@ class RakutenSecurities(IWebSite):
             Alert(driver).accept()
             self.__isLogin = False
 
-    def get_amount(self, logout_required: bool) -> dict:
+    def get_amount(self, account_code: str, logout_required: bool) -> dict:
         """口座情報を取得する
         Args:
             logout_required (bool): 処理終了後、ログアウトする場合はtrue
@@ -100,7 +97,7 @@ class RakutenSecurities(IWebSite):
         amount = scrapebs.select_one("#asset_total_amount")
         # データの設定
         account_info_dic = {
-            settings.CODE: self.__code,
+            settings.ACCOUNT_CODE: account_code,
             settings.AMOUNT: amount.text,
             settings.UPDATE_DATE: "{0:%Y/%m/%d}".format(datetime.datetime.now()),
         }

@@ -24,10 +24,11 @@ class GoogleSpreadSheet:
     __scope = " ".join(__scopes)
 
     # 列位置
-    CODE = 0
-    AMOUNT = 4
-    QUANTITY = 5
-    UPDATE_DATE = 6
+    SITE_CODE = 0
+    ACCOUNT_CODE = 1
+    AMOUNT = 5
+    QUANTITY = 6
+    UPDATE_DATE = 7
 
     NAME = 0
     COMPANY = 1
@@ -61,10 +62,10 @@ class GoogleSpreadSheet:
         if worksheet is None:
             raise ValueError("error-sheetname is None.")
 
-        cell = worksheet.find(account_info_dic[settings.CODE])
+        cell = worksheet.find(account_info_dic[settings.ACCOUNT_CODE])
         if cell is None:
             return
-        cell_list = worksheet.range(cell.row, self.CODE + 1, cell.row, self.UPDATE_DATE + 1)  # type: ignore
+        cell_list = worksheet.range(cell.row, self.SITE_CODE + 1, cell.row, self.UPDATE_DATE + 1)  # type: ignore
         if settings.AMOUNT in account_info_dic:
             num_value = round(
                 float(account_info_dic[settings.AMOUNT].replace(",", "")), 0

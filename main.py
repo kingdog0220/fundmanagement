@@ -13,12 +13,18 @@ try:
     print("START : {0:%Y/%m/%d %H:%M:%S}".format(datetime.datetime.now()))
     # 口座情報の取得
     container = WebSiteDIContainer()
-    website_list = [settings.MUFJ_BANK, settings.RAKUTEN_SECURITIES]
+    website_dic = {
+        settings.MUFJ_BANK: [settings.MUFJ_BANK_ACCOUNT],
+        settings.RAKUTEN_SECURITIES: [settings.RAKUTEN_SECURITIES_ACCOUNT],
+    }
     account_info_list = []
-    for website_code in website_list:
-        website = container.resolve(website_code)
-        account_info_dic = website.get_account_info()
-        account_info_list.append(account_info_dic)
+    for site_code, account_codes in website_dic.items():
+        website = container.resolve(site_code)
+        website.login()
+        for account_code in account_codes:
+            account_info_dic = website.get_account_info(account_code)
+            account_info_list.append(account_info_dic)
+        website.logout()
 
     # 投資信託の基本情報取得
     wealthadvisor = WealthAdvisor()

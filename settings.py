@@ -17,9 +17,11 @@ E_MAXIS_SLIM_SP500_URL = (
 
 # 各銀行・証券会社コード値
 MUFJ_BANK = "MUFJ"
+MUFJ_BANK_ACCOUNT = "MUFJ_ACC"
 RAKUTEN_SECURITIES = "RKS"
+RAKUTEN_SECURITIES_ACCOUNT = "RKS_ACC"
 
-CODE = "code"
+ACCOUNT_CODE = "account_code"
 AMOUNT = "amount"
 QUANTITY = "quantity"
 UPDATE_DATE = "update_date"
