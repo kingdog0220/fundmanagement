@@ -16,6 +16,7 @@ try:
     website_dic = {
         settings.MUFJ_BANK: [settings.MUFJ_BANK_ACCOUNT],
         settings.RAKUTEN_SECURITIES: [settings.RAKUTEN_SECURITIES_ACCOUNT],
+        settings.GMO: [settings.GMO_JPY, settings.GMO_BTC, settings.GMO_XTZ],
     }
     account_info_list = []
     for site_code, account_codes in website_dic.items():
