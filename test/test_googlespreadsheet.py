@@ -73,7 +73,8 @@ class TestGoogleSpreadSheet(unittest.TestCase):
     def test_write_account_info(self):
         account_info_dic = {
             "account_code": "RKS_ACC",
-            "amount": "1,234,567",
+            "amount": "1,234,567.012",
+            "quantity": "1.20105",
             "update_date": "2023/05/05",
         }
         googlespreadsheet = GoogleSpreadSheet()

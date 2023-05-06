@@ -1,6 +1,7 @@
 from injector import Injector
 
 import settings
+from fund.gmo import GMO
 from fund.mufj import MUFJBank
 from fund.rakuten_securities import RakutenSecurities
 
@@ -14,6 +15,7 @@ class WebSiteDIContainer:
         # CODE値をキーにしてクラスを使うよう登録する
         binder.bind(settings.MUFJ_BANK, MUFJBank)
         binder.bind(settings.RAKUTEN_SECURITIES, RakutenSecurities)
+        binder.bind(settings.GMO, GMO)
 
     def resolve(self, cls):
         # injector.get()に引数を渡すと依存関係を解決してインスタンスを生成する
