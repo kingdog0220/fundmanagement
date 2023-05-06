@@ -13,16 +13,23 @@ try:
     print("START : {0:%Y/%m/%d %H:%M:%S}".format(datetime.datetime.now()))
     # 口座情報の取得
     container = WebSiteDIContainer()
-    website = container.resolve(settings.RAKUTEN_SECURITIES)
-    account_info_dic = website.get_account_info()
+    website_list = [settings.MUFJ_BANK, settings.RAKUTEN_SECURITIES]
+    account_info_list = []
+    for website_code in website_list:
+        website = container.resolve(website_code)
+        account_info_dic = website.get_account_info()
+        account_info_list.append(account_info_dic)
+
     # 投資信託の基本情報取得
     wealthadvisor = WealthAdvisor()
     fundinfolist = wealthadvisor.get_fundinfolist()
     # GoogleSpreadSheetへ書き込む
     googlespreadsheet = GoogleSpreadSheet()
-    googlespreadsheet.write_account_info(
-        settings.TOTAL_ASSET_SHEETNAME, account_info_dic
-    )
+    for account_info_dic in account_info_list:
+        googlespreadsheet.write_account_info(
+            settings.TOTAL_ASSET_SHEETNAME, account_info_dic
+        )
+
     googlespreadsheet.write_fundinfolist(settings.FUNDINFO_SHEETNAME, fundinfolist)
     files = file.get_files(settings.CSV_DIR)
     # 1件しか取得しない想定

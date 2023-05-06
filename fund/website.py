@@ -1,6 +1,7 @@
 from injector import Injector
 
 import settings
+from fund.mufj import MUFJBank
 from fund.rakuten_securities import RakutenSecurities
 
 
@@ -11,6 +12,7 @@ class WebSiteDIContainer:
     @classmethod
     def config(cls, binder):
         # CODE値をキーにしてクラスを使うよう登録する
+        binder.bind(settings.MUFJ_BANK, MUFJBank)
         binder.bind(settings.RAKUTEN_SECURITIES, RakutenSecurities)
 
     def resolve(self, cls):
