@@ -15,7 +15,7 @@ class TestGoogleSpreadSheet(unittest.TestCase):
         worksheet2 = googlespreadsheet.workbook.worksheet("投資信託リターンテスト")
         worksheet2.clear()
 
-        googlespreadsheet.workbook.values_clear("'総資産テスト'!E3:G16")
+        googlespreadsheet.workbook.values_clear("'総資産テスト'!F3:I16")
 
     @unittest.skip("個別に実行。書き込まれた結果を実際に確認する")
     def test_write_fundinfolist(self):
@@ -72,7 +72,7 @@ class TestGoogleSpreadSheet(unittest.TestCase):
     @unittest.skip("個別に実行。書き込まれた結果を実際に確認する")
     def test_write_account_info(self):
         account_info_dic = {
-            "code": "RKS",
+            "account_code": "RKS_ACC",
             "amount": "1,234,567",
             "update_date": "2023/05/05",
         }

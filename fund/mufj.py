@@ -15,9 +15,6 @@ class MUFJBank(IWebSite):
     # ログイン状態を表すフラグ
     __isLogin: bool
 
-    # サイトのCODE
-    __code = settings.MUFJ_BANK
-
     @property
     def isLogin(self):
         return self.__isLogin
@@ -46,9 +43,9 @@ class MUFJBank(IWebSite):
         login_button.click()
         self.__isLogin = True
 
-    def get_account_info(self) -> dict:
+    def get_account_info(self, account_code: str) -> dict:
         """口座情報を取得する"""
-        account_info_dic = self.get_amount(True)
+        account_info_dic = self.get_amount(account_code, True)
         return account_info_dic
 
     def logout(self):
@@ -69,7 +66,7 @@ class MUFJBank(IWebSite):
             # 待機
             time.sleep(3)
 
-    def get_amount(self, logout_required: bool) -> dict:
+    def get_amount(self, account_code: str, logout_required: bool) -> dict:
         """口座情報を取得する
 
         Args:
@@ -90,7 +87,7 @@ class MUFJBank(IWebSite):
         amount = scrapebs.select_one(".total-amount-unmask")
         # データの設定
         account_info_dic = {
-            settings.CODE: self.__code,
+            settings.ACCOUNT_CODE: account_code,
             settings.AMOUNT: amount.text,
             settings.UPDATE_DATE: "{0:%Y/%m/%d}".format(datetime.datetime.now()),
         }
