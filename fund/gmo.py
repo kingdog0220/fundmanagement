@@ -12,6 +12,8 @@ from fund.iwebsite import IWebSite
 class GMO(IWebSite):
     """GMOコインのサイト"""
 
+    __data: dict
+
     __apiKey = settings.GMO_API_KEY
     __secretKey = settings.GMO_API_SECRET
     __timestamp = "{0}000".format(int(time.mktime(datetime.datetime.now().timetuple())))
@@ -27,19 +29,24 @@ class GMO(IWebSite):
     ).hexdigest()
     __headers = {"API-KEY": __apiKey, "API-TIMESTAMP": __timestamp, "API-SIGN": __sign}
 
+    def __init__(self):
+        self.__data = {}
+
     def login(self):
         """サイトにログインする"""
         pass
 
     def get_account_info(self, account_code: str) -> dict:
         """口座情報を取得する"""
-        data = self.get_assets()
+        # APIの実行は最初の1回だけ
+        if not self.__data:
+            self.__data = self.get_assets()
         # JSONなのでいったん文字列で受ける
         amount = ""
         available = ""
         conversionRate = ""
         symbol = account_code.replace("GMO", "")
-        for item in data["data"]:
+        for item in self.__data["data"]:
             if item["symbol"] == symbol:
                 amount = item["amount"]
                 available = item["available"]
