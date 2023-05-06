@@ -67,12 +67,13 @@ class GoogleSpreadSheet:
             return
         cell_list = worksheet.range(cell.row, self.SITE_CODE + 1, cell.row, self.UPDATE_DATE + 1)  # type: ignore
         if settings.AMOUNT in account_info_dic:
-            num_value = round(
-                float(account_info_dic[settings.AMOUNT].replace(",", "")), 0
+            num_amount = int(
+                round(float(account_info_dic[settings.AMOUNT].replace(",", "")), 0)
             )
-            cell_list[self.AMOUNT].value = num_value
+            cell_list[self.AMOUNT].value = num_amount
         if settings.QUANTITY in account_info_dic:
-            cell_list[self.QUANTITY].value = account_info_dic[settings.QUANTITY]
+            num_quantity = round(float(account_info_dic[settings.QUANTITY]), 4)
+            cell_list[self.QUANTITY].value = num_quantity
         if settings.UPDATE_DATE in account_info_dic:
             cell_list[self.UPDATE_DATE].value = account_info_dic[settings.UPDATE_DATE]
         worksheet.update_cells(cell_list)

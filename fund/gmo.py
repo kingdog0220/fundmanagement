@@ -56,8 +56,8 @@ class GMO(IWebSite):
         # データの設定
         account_info_dic = {
             settings.ACCOUNT_CODE: account_code,
-            settings.AMOUNT: self.calc_amount(amount, conversionRate),
-            settings.QUANTITY: round(float(available), 4),
+            settings.AMOUNT: str(self.calc_amount(amount, conversionRate)),
+            settings.QUANTITY: available,
             settings.UPDATE_DATE: "{0:%Y/%m/%d}".format(datetime.datetime.now()),
         }
         return account_info_dic
