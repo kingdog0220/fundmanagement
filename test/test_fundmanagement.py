@@ -1,13 +1,17 @@
+import json
 import os
 import shutil
 import unittest
 
 import file
+from fund.gmo import GMO
 from fund.wealthadvisor import WealthAdvisor
 
 TEST_DIR = r"D:\src\fundmanagement\test\test_case\rakuten"
 TEST_DIR_OLD = r"D:\src\fundmanagement\test\test_case\rakuten\old"
 FILE_NAME = "TotalReturn_test.csv"
+
+TEST_DIR_GMO = r"D:\src\fundmanagement\test\test_case\gmo\gmo_test.json"
 
 
 class TestFundManagement(unittest.TestCase):
@@ -39,3 +43,9 @@ class TestFundManagement(unittest.TestCase):
         wealthadvisor = WealthAdvisor()
         value = wealthadvisor.convert_to_billion("914,754百万円")
         self.assertEquals(value, 9147.54)
+
+    def test_get_gmo_account_assets(self):
+        gmo = GMO()
+        data = gmo.get_account_info("GMO")
+        with open(TEST_DIR_GMO, mode="wt", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)

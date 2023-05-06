@@ -1,0 +1,162 @@
+{
+  "status": 0,
+  "data": [
+    {
+      "amount": "49647",
+      "available": "49647",
+      "conversionRate": "1",
+      "symbol": "JPY"
+    },
+    {
+      "amount": "0.07923835",
+      "available": "0.07923835",
+      "conversionRate": "3863930",
+      "symbol": "BTC"
+    },
+    {
+      "amount": "0",
+      "available": "0",
+      "conversionRate": "258652",
+      "symbol": "ETH"
+    },
+    {
+      "amount": "0",
+      "available": "0",
+      "conversionRate": "15661",
+      "symbol": "BCH"
+    },
+    {
+      "amount": "0",
+      "available": "0",
+      "conversionRate": "11475",
+      "symbol": "LTC"
+    },
+    {
+      "amount": "0",
+      "available": "0",
+      "conversionRate": "60.953",
+      "symbol": "XRP"
+    },
+    {
+      "amount": "0",
+      "available": "0",
+      "conversionRate": "4.649",
+      "symbol": "XEM"
+    },
+    {
+      "amount": "0",
+      "available": "0",
+      "conversionRate": "12.135",
+      "symbol": "XLM"
+    },
+    {
+      "amount": "0",
+      "available": "0",
+      "conversionRate": "31.137",
+      "symbol": "BAT"
+    },
+    {
+      "amount": "0",
+      "available": "0",
+      "conversionRate": "133.351",
+      "symbol": "OMG"
+    },
+    {
+      "amount": "150.052643",
+      "available": "150.052643",
+      "conversionRate": "130.7",
+      "symbol": "XTZ"
+    },
+    {
+      "amount": "0",
+      "available": "0",
+      "conversionRate": "368.292",
+      "symbol": "QTUM"
+    },
+    {
+      "amount": "0",
+      "available": "0",
+      "conversionRate": "49.644",
+      "symbol": "ENJ"
+    },
+    {
+      "amount": "0",
+      "available": "0",
+      "conversionRate": "755",
+      "symbol": "DOT"
+    },
+    {
+      "amount": "0",
+      "available": "0",
+      "conversionRate": "1424",
+      "symbol": "ATOM"
+    },
+    {
+      "amount": "0",
+      "available": "0",
+      "conversionRate": "93204",
+      "symbol": "MKR"
+    },
+    {
+      "amount": "0",
+      "available": "0",
+      "conversionRate": "134.433",
+      "symbol": "DAI"
+    },
+    {
+      "amount": "0",
+      "available": "0",
+      "conversionRate": "4.179",
+      "symbol": "XYM"
+    },
+    {
+      "amount": "0",
+      "available": "0",
+      "conversionRate": "60",
+      "symbol": "MONA"
+    },
+    {
+      "amount": "0",
+      "available": "0",
+      "conversionRate": "0.31",
+      "symbol": "FCR"
+    },
+    {
+      "amount": "0",
+      "available": "0",
+      "conversionRate": "49.993",
+      "symbol": "ADA"
+    },
+    {
+      "amount": "0",
+      "available": "0",
+      "conversionRate": "926",
+      "symbol": "LINK"
+    },
+    {
+      "amount": "0",
+      "available": "0",
+      "conversionRate": "10.148",
+      "symbol": "DOGE"
+    },
+    {
+      "amount": "0",
+      "available": "0",
+      "conversionRate": "2835",
+      "symbol": "SOL"
+    },
+    {
+      "amount": "0",
+      "available": "0",
+      "conversionRate": "0",
+      "symbol": "FLR"
+    },
+    {
+      "amount": "0",
+      "available": "0",
+      "conversionRate": "8.27",
+      "symbol": "ASTR"
+    }
+  ],
+  "responsetime": "2023-05-06T04:57:42.275Z"
+}
