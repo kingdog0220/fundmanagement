@@ -17,6 +17,9 @@ class SBISecurities(IWebSite):
     # ログイン状態を表すフラグ
     __isLogin: bool
 
+    # 口座情報のインスタンス
+    __account_instance: IAccount
+
     @property
     def isLogin(self):
         return self.__isLogin
@@ -63,8 +66,10 @@ class SBISecurities(IWebSite):
         """
         if not self.__isLogin:
             self.login()
-        instance = self.create_instance(account_code)
-        account_info_dic = instance.get_account()
+        self.create_account_instance(account_code)
+        if self.__account_instance is None:
+            raise ValueError("error-SBISecurities account instance is None")
+        account_info_dic = self.__account_instance.get_account()
         return account_info_dic
 
     def logout(self):
@@ -81,14 +86,22 @@ class SBISecurities(IWebSite):
             self.__isLogin = False
 
     # ファクトリーメソッド
-    def create_instance(self, account_code: str):
+    def create_account_instance(self, account_code: str):
+        """口座情報を取得する具象インスタンスを生成する
+
+        Args:
+            account_code (str): アカウントコード
+
+        Raises:
+            NotImplementedError: 想定外のアカウントコードが渡された場合
+        """
         if account_code == settings.SBI_SECURITIES_MMF_ACCOUNT:
-            return SBISecuritiesMMF(account_code)
+            self.__account_instance = SBISecuritiesMMF(account_code)
         elif account_code == settings.SBI_SECURITIES_FX_ACCOUNT:
-            return SBISecuritiesFX(account_code)
+            self.__account_instance = SBISecuritiesFX(account_code)
         else:
             # 不正な値の場合などのデフォルト処理
-            raise ValueError("error-SBISecurities-create_instance")
+            raise NotImplementedError()
 
 
 class SBISecuritiesMMF(IAccount):
