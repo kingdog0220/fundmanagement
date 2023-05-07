@@ -43,9 +43,16 @@ class MUFJBank(IWebSite):
         login_button.click()
         self.__isLogin = True
 
-    def get_account_info(self, account_code: str) -> dict:
-        """口座情報を取得する"""
-        account_info_dic = self.get_amount(account_code, True)
+    def get_account_info_dic(self, account_code: str) -> dict:
+        """口座情報を取得する
+
+        Args:
+            account_code (str): アカウントコード
+
+        Returns:
+            dict: 口座情報
+        """
+        account_info_dic = self.get_account(account_code)
         return account_info_dic
 
     def logout(self):
@@ -66,14 +73,14 @@ class MUFJBank(IWebSite):
             # 待機
             time.sleep(3)
 
-    def get_amount(self, account_code: str, logout_required: bool) -> dict:
+    def get_account(self, account_code: str) -> dict:
         """口座情報を取得する
 
         Args:
-            logout_required (bool): 処理終了後、ログアウトする場合はtrue
+            account_code (str): アカウントコード
 
         Returns:
-            dict: 口座情報のディクショナリ
+            dict: 口座情報
         """
         if not self.__isLogin:
             self.login()
@@ -91,7 +98,4 @@ class MUFJBank(IWebSite):
             settings.AMOUNT: amount.text,
             settings.UPDATE_DATE: "{0:%Y/%m/%d}".format(datetime.datetime.now()),
         }
-
-        if logout_required:
-            self.logout()
         return account_info_dic

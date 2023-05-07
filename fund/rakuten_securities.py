@@ -52,11 +52,18 @@ class RakutenSecurities(IWebSite):
         wait.until(EC.presence_of_element_located((By.ID, "homeAssetsPanel")))
         self.__isLogin = True
 
-    def get_account_info(self, account_code: str) -> dict:
-        """口座情報を取得する"""
+    def get_account_info_dic(self, account_code: str) -> dict:
+        """口座情報を取得する
+
+        Args:
+            account_code (str): アカウントコード
+
+        Returns:
+            dict: 口座情報
+        """
         # 口座情報取得⇒トータルリターンの取得
-        account_info_dic = self.get_amount(account_code, False)
-        self.get_total_return_csv(True)
+        account_info_dic = self.get_account(account_code)
+        self.get_total_return_csv()
         return account_info_dic
 
     def logout(self):
@@ -79,13 +86,14 @@ class RakutenSecurities(IWebSite):
             Alert(driver).accept()
             self.__isLogin = False
 
-    def get_amount(self, account_code: str, logout_required: bool) -> dict:
+    def get_account(self, account_code: str) -> dict:
         """口座情報を取得する
+
         Args:
-            logout_required (bool): 処理終了後、ログアウトする場合はtrue
+            account_code (str): アカウントコード
 
         Returns:
-            dict: 口座情報のディクショナリ
+            dict: 口座情報
         """
         if not self.__isLogin:
             self.login()
@@ -101,21 +109,14 @@ class RakutenSecurities(IWebSite):
             settings.AMOUNT: amount.text,
             settings.UPDATE_DATE: "{0:%Y/%m/%d}".format(datetime.datetime.now()),
         }
-        if logout_required:
-            self.logout()
         return account_info_dic
 
-    def get_total_return_csv(self, logout_required: bool):
-        """投資のリターンデータを取得する
-
-        Args:
-            logout_required (bool): 処理終了後、ログアウトする場合はtrue
-        """
-        self.login()
+    def get_total_return_csv(self):
+        """投資のリターンデータを取得する"""
+        if not self.__isLogin:
+            self.login()
         self.go_to_target_page()
         self.download_total_return_csv()
-        if logout_required:
-            self.logout()
 
     def go_to_target_page(self):
         """目的のページへ遷移する"""
