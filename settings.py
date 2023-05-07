@@ -24,6 +24,9 @@ GMO = "GMO"
 GMO_JPY = "GMOJPY"
 GMO_BTC = "GMOBTC"
 GMO_XTZ = "GMOXTZ"
+SBI_SECURITIES = "SBIS"
+SBI_SECURITIES_MMF_ACCOUNT = "SBISMMF_ACC"
+SBI_SECURITIES_FX_ACCOUNT = "SBISFX_ACC"
 
 ACCOUNT_CODE = "account_code"
 AMOUNT = "amount"
@@ -46,6 +49,7 @@ MUFJ_LOGIN_URL = (
     "https://entry11.bk.mufg.jp/ibg/dfw/APLIN/loginib/login?_TRANID=AG004_001"
 )
 RAKUTEN_LOGIN_URL = "https://www.rakuten-sec.co.jp"
+SBI_LOGIN_URL = "https://www.sbisec.co.jp/ETGate"
 
 # 認証情報の読み込み
 dotenv_path = join(dirname(__file__), ".env")
@@ -59,3 +63,5 @@ MUFJ_CONTRACT_NUMBER = os.environ.get("MUFJ_CONTRACT_NUMBER")
 MUFJ_PASSWORD = os.environ.get("MUFJ_PASSWORD")
 GMO_API_KEY = os.environ.get("GMO_API_KEY")
 GMO_API_SECRET = os.environ.get("GMO_API_SECRET")
+SBI_LOGIN_ID = os.environ.get("SBI_LOGIN_ID")
+SBI_PASSWORD = os.environ.get("SBI_PASSWORD")

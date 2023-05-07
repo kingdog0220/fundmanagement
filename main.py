@@ -17,13 +17,17 @@ try:
         settings.MUFJ_BANK: [settings.MUFJ_BANK_ACCOUNT],
         settings.RAKUTEN_SECURITIES: [settings.RAKUTEN_SECURITIES_ACCOUNT],
         settings.GMO: [settings.GMO_JPY, settings.GMO_BTC, settings.GMO_XTZ],
+        settings.SBI_SECURITIES: [
+            settings.SBI_SECURITIES_MMF_ACCOUNT,
+            settings.SBI_SECURITIES_FX_ACCOUNT,
+        ],
     }
     account_info_list = []
     for site_code, account_codes in website_dic.items():
         website = container.resolve(site_code)
         website.login()
         for account_code in account_codes:
-            account_info_dic = website.get_account_info(account_code)
+            account_info_dic = website.get_account_info_dic(account_code)
             account_info_list.append(account_info_dic)
         website.logout()
 
