@@ -6,6 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
 import settings
+from fund.iaccount import IAccount
 from fund.iwebsite import IWebSite
 from seleniumlauncher import SeleniumLauncher
 
@@ -60,7 +61,10 @@ class SBISecurities(IWebSite):
         Returns:
             dict: 口座情報
         """
-        account_info_dic = self.get_account(account_code)
+        if not self.__isLogin:
+            self.login()
+        instance = self.create_instance(account_code)
+        account_info_dic = instance.get_account()
         return account_info_dic
 
     def logout(self):
@@ -76,18 +80,29 @@ class SBISecurities(IWebSite):
             time.sleep(3)
             self.__isLogin = False
 
-    def get_account(self, account_code: str) -> dict:
-        """口座情報を取得する
+    # ファクトリーメソッド
+    def create_instance(self, account_code: str):
+        if account_code == settings.SBI_SECURITIES_MMF_ACCOUNT:
+            return SBISecuritiesMMF(account_code)
+        elif account_code == settings.SBI_SECURITIES_FX_ACCOUNT:
+            return SBISecuritiesFX(account_code)
+        else:
+            # 不正な値の場合などのデフォルト処理
+            raise ValueError("error-SBISecurities-create_instance")
 
-        Args:
-            account_code (str): アカウントコード
+
+class SBISecuritiesMMF(IAccount):
+    __account_code: str
+
+    def __init__(self, account_code: str):
+        self.__account_code = account_code
+
+    def get_account(self) -> dict:
+        """口座情報を取得する
 
         Returns:
             dict: 口座情報
         """
-        if not self.__isLogin:
-            self.login()
-
         driver = SeleniumLauncher()
         wait = WebDriverWait(driver, 10)
         wait.until(
@@ -118,18 +133,40 @@ class SBISecurities(IWebSite):
         wait.until(EC.presence_of_element_located((By.ID, "summary_USD")))
         quantity = driver.find_element(
             By.XPATH, "//*[@id=" + '"summary_USD"' + "]/td[3]/table/tbody/tr[1]/td[2]/b"
-        )
+        ).text
         amount = driver.find_element(
             By.XPATH, "//*[@id=" + '"summary_USD"' + "]/td[3]/table/tbody/tr[2]/td[2]/b"
-        )
+        ).text
         # タブを閉じて最初のタブへ
         driver.close()
         driver.switch_to.window(first_tab_handle)
         # データの設定
         account_info_dic = {
-            settings.ACCOUNT_CODE: account_code,
-            settings.AMOUNT: amount.text,
-            settings.QUANTITY: quantity.text,
+            settings.ACCOUNT_CODE: self.__account_code,
+            settings.AMOUNT: amount,
+            settings.QUANTITY: quantity,
+            settings.UPDATE_DATE: "{0:%Y/%m/%d}".format(datetime.datetime.now()),
+        }
+        return account_info_dic
+
+
+class SBISecuritiesFX(IAccount):
+    __account_code: str
+
+    def __init__(self, account_code: str):
+        self.__account_code = account_code
+
+    def get_account(self) -> dict:
+        """口座情報を取得する
+
+        Returns:
+            dict: 口座情報
+        """
+        # 外貨預金はないため0で返す
+        account_info_dic = {
+            settings.ACCOUNT_CODE: self.__account_code,
+            settings.AMOUNT: "0",
+            settings.QUANTITY: "0",
             settings.UPDATE_DATE: "{0:%Y/%m/%d}".format(datetime.datetime.now()),
         }
         return account_info_dic
