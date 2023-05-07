@@ -90,7 +90,7 @@ class MUFJBank(IWebSite):
         wait.until(
             EC.presence_of_element_located((By.CLASS_NAME, "total-amount-unmask"))
         )
-        scrapebs = scrapebeautifulsoup(driver.current_url, driver.page_source)
+        scrapebs = scrapebeautifulsoup(driver.page_source)
         amount = scrapebs.select_one(".total-amount-unmask")
         # データの設定
         account_info_dic = {
