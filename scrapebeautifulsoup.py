@@ -12,19 +12,19 @@ class ScrapeBeautifulSoup:
             return None
         return self.__parsedhtml
 
-    def __init__(self, url: str, html=None):
-        """BeautifulSoupでhtmlをパースする初期設定
+    def __init__(self, html):
+        """BeautifulSoupインスタンスの生成
 
         Args:
-            url (str): 解析するサイトのURL
-            html (_type_, optional): 解析するサイトのhtml. Defaults to None.
+            html (_type_): パースするHTML
+
+        Raises:
+            bs4.FeatureNotFound: パースできなかった場合
         """
-        if html is None:
-            res = requests.get(url)
-            res.raise_for_status()
-            self.__parsedhtml = bs4.BeautifulSoup(res.content, "html.parser")
-        else:
+        try:
             self.__parsedhtml = bs4.BeautifulSoup(html, "html.parser")
+        except bs4.FeatureNotFound:
+            raise
 
     def select_one(self, cssselector: str):
         """要素の取得

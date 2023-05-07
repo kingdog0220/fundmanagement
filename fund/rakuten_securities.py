@@ -101,7 +101,7 @@ class RakutenSecurities(IWebSite):
         driver = SeleniumLauncher()
         wait = WebDriverWait(driver, 10)
         wait.until(EC.presence_of_element_located((By.ID, "asset_total_amount")))
-        scrapebs = scrapebeautifulsoup(driver.current_url, driver.page_source)
+        scrapebs = scrapebeautifulsoup(driver.page_source)
         amount = scrapebs.select_one("#asset_total_amount")
         # データの設定
         account_info_dic = {
