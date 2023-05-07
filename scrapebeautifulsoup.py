@@ -1,6 +1,5 @@
 # BeautifulSoup4を使用したスクレイピング
 import bs4
-import requests
 
 
 class ScrapeBeautifulSoup:
