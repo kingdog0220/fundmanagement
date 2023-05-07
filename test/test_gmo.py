@@ -19,7 +19,7 @@ class TestGMO(unittest.TestCase):
     def test_get_gmo_account_assets_jpy(self):
         """実際にJSONファイルを出力できるか"""
         gmo = GMO()
-        data = gmo.get_account_info("GMOJPY")
+        data = gmo.get_account_info_dic("GMOJPY")
         dir = os.path.join(TEST_DIR, "gmo_test_jpy.json")
         with open(dir, mode="wt", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
@@ -27,7 +27,7 @@ class TestGMO(unittest.TestCase):
     def test_get_gmo_account_assets_btc(self):
         """実際にJSONファイルを出力できるか"""
         gmo = GMO()
-        data = gmo.get_account_info("GMOBTC")
+        data = gmo.get_account_info_dic("GMOBTC")
         dir = os.path.join(TEST_DIR, "gmo_test_btc.json")
         with open(dir, mode="wt", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)

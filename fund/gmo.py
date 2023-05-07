@@ -36,8 +36,15 @@ class GMO(IWebSite):
         """サイトにログインする"""
         pass
 
-    def get_account_info(self, account_code: str) -> dict:
-        """口座情報を取得する"""
+    def get_account_info_dic(self, account_code: str) -> dict:
+        """口座情報を取得する
+
+        Args:
+            account_code (str): アカウントコード
+
+        Returns:
+            dict: 口座情報
+        """
         # APIの実行は最初の1回だけ
         if not self.__data:
             self.__data = self.get_assets()
