@@ -95,13 +95,15 @@ class SBISecurities(IWebSite):
         Raises:
             NotImplementedError: 想定外のアカウントコードが渡された場合
         """
-        if account_code == settings.SBI_SECURITIES_MMF_ACCOUNT:
-            self.__account_instance = SBISecuritiesMMF(account_code)
-        elif account_code == settings.SBI_SECURITIES_FX_ACCOUNT:
-            self.__account_instance = SBISecuritiesFX(account_code)
-        else:
+        account_class_dic = {
+            settings.SBI_SECURITIES_MMF_ACCOUNT: SBISecuritiesMMF,
+            settings.SBI_SECURITIES_FX_ACCOUNT: SBISecuritiesFX,
+        }
+        account_class = account_class_dic.get(account_code)
+        if account_class is None:
             # 不正な値の場合などのデフォルト処理
             raise NotImplementedError()
+        self.__account_instance = account_class(account_code)
 
 
 class SBISecuritiesMMF(IAccount):
