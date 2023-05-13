@@ -21,6 +21,7 @@ try:
             settings.SBI_SECURITIES_MMF_ACCOUNT,
             settings.SBI_SECURITIES_FX_ACCOUNT,
         ],
+        settings.RAKUTEN_BANK: [settings.RAKUTEN_BANK_ACCOUNT],
     }
     account_info_list = []
     for site_code, account_codes in website_dic.items():

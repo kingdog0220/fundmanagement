@@ -27,6 +27,8 @@ GMO_XTZ = "GMOXTZ"
 SBI_SECURITIES = "SBIS"
 SBI_SECURITIES_MMF_ACCOUNT = "SBISMMF_ACC"
 SBI_SECURITIES_FX_ACCOUNT = "SBISFX_ACC"
+RAKUTEN_BANK = "RKB"
+RAKUTEN_BANK_ACCOUNT = "RKB_ACC"
 
 ACCOUNT_CODE = "account_code"
 AMOUNT = "amount"
@@ -50,6 +52,7 @@ MUFJ_LOGIN_URL = (
 )
 RAKUTEN_LOGIN_URL = "https://www.rakuten-sec.co.jp"
 SBI_LOGIN_URL = "https://www.sbisec.co.jp/ETGate"
+RAKUTEN_BANK_LOGIN_URL = "https://www.rakuten-bank.co.jp"
 
 # 認証情報の読み込み
 dotenv_path = join(dirname(__file__), ".env")
@@ -65,3 +68,5 @@ GMO_API_KEY = os.environ.get("GMO_API_KEY")
 GMO_API_SECRET = os.environ.get("GMO_API_SECRET")
 SBI_LOGIN_ID = os.environ.get("SBI_LOGIN_ID")
 SBI_PASSWORD = os.environ.get("SBI_PASSWORD")
+RAKUTEN_BANK_LOGIN_ID = os.environ.get("RAKUTEN_BANK_LOGIN_ID")
+RAKUTEN_BANK_PASSWORD = os.environ.get("RAKUTEN_BANK_PASSWORD")
