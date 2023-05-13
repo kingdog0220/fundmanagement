@@ -40,6 +40,16 @@ class GMO(IWebSite):
         # APIの実行は最初の1回だけ
         if not self.__data:
             self.__data = self.get_assets()
+            if self.__data["status"] != 0:
+                messages = self.__data["messages"]
+                print(
+                    "error-GMO get_assets {0}, {1} : {2:%Y/%m/%d %H:%M:%S}".format(
+                        messages[0]["message_code"],
+                        messages[0]["message_string"],
+                        datetime.datetime.now(),
+                    )
+                )
+                return {}
         # JSONなのでいったん文字列で受ける
         amount = ""
         available = ""
