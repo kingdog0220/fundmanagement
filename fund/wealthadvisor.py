@@ -33,7 +33,7 @@ class WealthAdvisor:
                 # 信託報酬のレンダリング待ち
                 EC.presence_of_element_located((By.CSS_SELECTOR, "#graph21 div"))
             )
-            scrapebs = scrapebeautifulsoup(driver.current_url, driver.page_source)
+            scrapebs = scrapebeautifulsoup(driver.page_source)
             name = self.get_name(scrapebs)
             company = self.get_company(scrapebs)
             category = self.get_category(scrapebs)
