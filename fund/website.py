@@ -1,6 +1,7 @@
 from injector import Injector
 
 import settings
+from fund.dc import DCBank
 from fund.gmo import GMO
 from fund.iwebsite import IWebSite
 from fund.mufj import MUFJBank
@@ -23,6 +24,7 @@ class WebSiteDIContainer:
         binder.bind(settings.SBI_SECURITIES, SBISecurities)
         binder.bind(settings.RAKUTEN_BANK, RakutenBank)
         binder.bind(settings.SBI_BANK, SBIBank)
+        binder.bind(settings.DC, DCBank)
 
     def resolve(self, cls) -> IWebSite:
         # injector.get()に引数を渡すと依存関係を解決してインスタンスを生成する

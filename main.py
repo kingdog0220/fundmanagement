@@ -23,6 +23,7 @@ try:
         ],
         settings.RAKUTEN_BANK: [settings.RAKUTEN_BANK_ACCOUNT],
         settings.SBI_BANK: [settings.SBI_BANK_ACCOUNT, settings.SBI_BANK_FX_ACCOUNT],
+        settings.DC: [settings.DC_ACCOUNT],
     }
     account_info_list = []
     for site_code, account_codes in website_dic.items():
