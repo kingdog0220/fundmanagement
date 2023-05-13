@@ -120,5 +120,6 @@ class RakutenBank(IWebSite):
                 By.XPATH,
                 "//*[@id=" + '"str-main"' + "]/p[8]/input",
             )
-            # ウインドウが閉じられる
+            # ウインドウを閉じて最初のウインドウに戻す
             close_button.click()
+            driver.switch_to.window(driver.window_handles[0])
