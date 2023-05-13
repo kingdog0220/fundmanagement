@@ -9,7 +9,6 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 import settings
 from fund.iwebsite import IWebSite
-from scrapebeautifulsoup import ScrapeBeautifulSoup as scrapebeautifulsoup
 from seleniumlauncher import SeleniumLauncher
 
 
@@ -101,12 +100,11 @@ class RakutenSecurities(IWebSite):
         driver = SeleniumLauncher()
         wait = WebDriverWait(driver, 10)
         wait.until(EC.presence_of_element_located((By.ID, "asset_total_amount")))
-        scrapebs = scrapebeautifulsoup(driver.page_source)
-        amount = scrapebs.select_one("#asset_total_amount")
+        amount = driver.find_element(By.ID, "asset_total_amount").text
         # データの設定
         account_info_dic = {
             settings.ACCOUNT_CODE: account_code,
-            settings.AMOUNT: amount.text,
+            settings.AMOUNT: amount,
             settings.UPDATE_DATE: "{0:%Y/%m/%d}".format(datetime.datetime.now()),
         }
         return account_info_dic
@@ -115,11 +113,11 @@ class RakutenSecurities(IWebSite):
         """投資のリターンデータを取得する"""
         if not self.__isLogin:
             self.login()
-        self.go_to_target_page()
+        self.go_to_total_return_page()
         self.download_total_return_csv()
 
-    def go_to_target_page(self):
-        """目的のページへ遷移する"""
+    def go_to_total_return_page(self):
+        """トータルリターンページへ遷移する"""
         if not self.__isLogin:
             self.login()
 
@@ -159,7 +157,7 @@ class RakutenSecurities(IWebSite):
         """リターンデータ(CSV)をダウンロードする"""
         if not self.__isLogin:
             self.login()
-            self.go_to_target_page()
+            self.go_to_total_return_page()
 
         driver = SeleniumLauncher()
         button = driver.find_element(
