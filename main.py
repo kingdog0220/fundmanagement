@@ -30,7 +30,7 @@ try:
         website = container.resolve(site_code)
         website.login()
         for account_code in account_codes:
-            account_info_dic = website.get_account_info_dic(account_code)
+            account_info_dic = website.get_account(account_code)
             account_info_list.append(account_info_dic)
         website.logout()
 

@@ -16,18 +16,18 @@ class RakutenSecurities(IWebSite):
     """楽天証券のサイト"""
 
     # ログイン状態を表すフラグ
-    __isLogin: bool
+    __is_login: bool
 
     @property
-    def isLogin(self):
-        return self.__isLogin
+    def is_login(self):
+        return self.__is_login
 
     def __init__(self):
-        self.__isLogin = False
+        self.__is_login = False
 
     def login(self):
         """サイトにログインする"""
-        if self.__isLogin:
+        if self.__is_login:
             return
 
         url = settings.RAKUTEN_LOGIN_URL
@@ -49,9 +49,9 @@ class RakutenSecurities(IWebSite):
 
         # とりあえず待機
         wait.until(EC.presence_of_element_located((By.ID, "homeAssetsPanel")))
-        self.__isLogin = True
+        self.__is_login = True
 
-    def get_account_info_dic(self, account_code: str) -> dict:
+    def get_account(self, account_code: str) -> dict:
         """口座情報を取得する
 
         Args:
@@ -61,13 +61,13 @@ class RakutenSecurities(IWebSite):
             dict: 口座情報
         """
         # 口座情報取得⇒トータルリターンの取得
-        account_info_dic = self.get_account(account_code)
+        account_info_dic = self.get_account_dic(account_code)
         self.get_total_return_csv()
         return account_info_dic
 
     def logout(self):
         """ログアウトする"""
-        if self.isLogin:
+        if self.is_login:
             driver = SeleniumLauncher()
             button = driver.find_element(
                 By.CLASS_NAME,
@@ -83,9 +83,9 @@ class RakutenSecurities(IWebSite):
             time.sleep(3)
             # ログアウト時のダイアログ
             Alert(driver).accept()
-            self.__isLogin = False
+            self.__is_login = False
 
-    def get_account(self, account_code: str) -> dict:
+    def get_account_dic(self, account_code: str) -> dict:
         """口座情報を取得する
 
         Args:
@@ -94,7 +94,7 @@ class RakutenSecurities(IWebSite):
         Returns:
             dict: 口座情報
         """
-        if not self.__isLogin:
+        if not self.__is_login:
             self.login()
 
         driver = SeleniumLauncher()
@@ -111,14 +111,14 @@ class RakutenSecurities(IWebSite):
 
     def get_total_return_csv(self):
         """投資のリターンデータを取得する"""
-        if not self.__isLogin:
+        if not self.__is_login:
             self.login()
         self.go_to_total_return_page()
         self.download_total_return_csv()
 
     def go_to_total_return_page(self):
         """トータルリターンページへ遷移する"""
-        if not self.__isLogin:
+        if not self.__is_login:
             self.login()
 
         driver = SeleniumLauncher()
@@ -155,7 +155,7 @@ class RakutenSecurities(IWebSite):
 
     def download_total_return_csv(self):
         """リターンデータ(CSV)をダウンロードする"""
-        if not self.__isLogin:
+        if not self.__is_login:
             self.login()
             self.go_to_total_return_page()
 

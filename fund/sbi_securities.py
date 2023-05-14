@@ -15,21 +15,21 @@ class SBISecurities(IWebSite):
     """SBI証券のサイト"""
 
     # ログイン状態を表すフラグ
-    __isLogin: bool
+    __is_login: bool
 
     # 口座情報のインスタンス
     __account_instance: IAccount
 
     @property
-    def isLogin(self):
-        return self.__isLogin
+    def is_login(self):
+        return self.__is_login
 
     def __init__(self):
-        self.__isLogin = False
+        self.__is_login = False
 
     def login(self):
         """サイトにログインする"""
-        if self.__isLogin:
+        if self.__is_login:
             return
 
         url = settings.SBI_LOGIN_URL
@@ -53,9 +53,9 @@ class SBISecurities(IWebSite):
                 (By.XPATH, "//*[@id=" + '"my-assets-button"' + "]/img")
             )
         )
-        self.__isLogin = True
+        self.__is_login = True
 
-    def get_account_info_dic(self, account_code: str) -> dict:
+    def get_account(self, account_code: str) -> dict:
         """口座情報を取得する
 
         Args:
@@ -64,17 +64,17 @@ class SBISecurities(IWebSite):
         Returns:
             dict: 口座情報
         """
-        if not self.__isLogin:
+        if not self.__is_login:
             self.login()
         self.create_account_instance(account_code)
         if self.__account_instance is None:
             raise ValueError("error-SBISecurities account instance is None")
-        account_info_dic = self.__account_instance.get_account()
+        account_info_dic = self.__account_instance.get_account_dic()
         return account_info_dic
 
     def logout(self):
         """ログアウトする"""
-        if self.__isLogin:
+        if self.__is_login:
             driver = SeleniumLauncher()
             button = driver.find_element(
                 By.ID,
@@ -83,7 +83,7 @@ class SBISecurities(IWebSite):
             button.click()
             # 待機
             time.sleep(3)
-            self.__isLogin = False
+            self.__is_login = False
 
     # ファクトリーメソッド
     def create_account_instance(self, account_code: str):
@@ -112,7 +112,7 @@ class SBISecuritiesMMF(IAccount):
     def __init__(self, account_code: str):
         self.__account_code = account_code
 
-    def get_account(self) -> dict:
+    def get_account_dic(self) -> dict:
         """口座情報を取得する
 
         Returns:
@@ -171,7 +171,7 @@ class SBISecuritiesFX(IAccount):
     def __init__(self, account_code: str):
         self.__account_code = account_code
 
-    def get_account(self) -> dict:
+    def get_account_dic(self) -> dict:
         """口座情報を取得する
 
         Returns:
