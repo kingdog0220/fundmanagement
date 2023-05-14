@@ -79,3 +79,18 @@ class TestGoogleSpreadSheet(unittest.TestCase):
         }
         googlespreadsheet = GoogleSpreadSheet()
         googlespreadsheet.write_account_info("総資産テスト", account_info_dic)
+
+    def test_convert_to_float(self):
+        googlespreadsheet = GoogleSpreadSheet()
+        value = googlespreadsheet.convert_to_float("12,000.123")
+        self.assertEquals(value, 12000.123)
+
+    def test_convert_to_float_empty(self):
+        googlespreadsheet = GoogleSpreadSheet()
+        value = googlespreadsheet.convert_to_float("")
+        self.assertEquals(value, 0)
+
+    def test_convert_to_float_exception(self):
+        googlespreadsheet = GoogleSpreadSheet()
+        with self.assertRaises(ValueError):
+            googlespreadsheet.convert_to_float("abc")

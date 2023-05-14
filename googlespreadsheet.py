@@ -68,11 +68,13 @@ class GoogleSpreadSheet:
         cell_list = worksheet.range(cell.row, self.SITE_CODE + 1, cell.row, self.UPDATE_DATE + 1)  # type: ignore
         if settings.AMOUNT in account_info_dic:
             num_amount = int(
-                round(float(account_info_dic[settings.AMOUNT].replace(",", "")), 0)
+                round(self.convert_to_float(account_info_dic[settings.AMOUNT]), 0)
             )
             cell_list[self.AMOUNT].value = num_amount
         if settings.QUANTITY in account_info_dic:
-            num_quantity = round(float(account_info_dic[settings.QUANTITY]), 4)
+            num_quantity = round(
+                self.convert_to_float(account_info_dic[settings.QUANTITY]), 4
+            )
             cell_list[self.QUANTITY].value = num_quantity
         if settings.UPDATE_DATE in account_info_dic:
             cell_list[self.UPDATE_DATE].value = account_info_dic[settings.UPDATE_DATE]
@@ -124,3 +126,22 @@ class GoogleSpreadSheet:
             params={"valueInputOption": "USER_ENTERED"},
             body={"values": list(csv.reader(open(filepath, encoding=encode)))},
         )
+
+    def convert_to_float(self, value: str) -> float:
+        """文字列をfloatに変換する
+
+        Args:
+            value (str): 値
+
+        Raises:
+            ValueError: 数値変換できない場合
+
+        Returns:
+            float: 変換後の値(空文字、Noneは0)
+        """
+        if not value:
+            return 0
+        try:
+            return float(value.replace(",", ""))
+        except ValueError:
+            raise ValueError("error-convert_to_float method is ValueError")

@@ -13,18 +13,18 @@ from seleniumlauncher import SeleniumLauncher
 
 class MUFJBank(IWebSite):
     # ログイン状態を表すフラグ
-    __isLogin: bool
+    __is_login: bool
 
     @property
-    def isLogin(self):
-        return self.__isLogin
+    def is_login(self):
+        return self.__is_login
 
     def __init__(self):
-        self.__isLogin = False
+        self.__is_login = False
 
     def login(self):
         """サイトにログインする"""
-        if self.__isLogin:
+        if self.__is_login:
             return
 
         url = settings.MUFJ_LOGIN_URL
@@ -41,9 +41,9 @@ class MUFJBank(IWebSite):
 
         login_button = driver.find_element(By.CLASS_NAME, "gonext")
         login_button.click()
-        self.__isLogin = True
+        self.__is_login = True
 
-    def get_account_info_dic(self, account_code: str) -> dict:
+    def get_account(self, account_code: str) -> dict:
         """口座情報を取得する
 
         Args:
@@ -52,12 +52,12 @@ class MUFJBank(IWebSite):
         Returns:
             dict: 口座情報
         """
-        account_info_dic = self.get_account(account_code)
+        account_info_dic = self.get_account_dic(account_code)
         return account_info_dic
 
     def logout(self):
         """ログアウトする"""
-        if self.__isLogin:
+        if self.__is_login:
             driver = SeleniumLauncher()
             wait = WebDriverWait(driver, 10)
             wait.until(
@@ -69,11 +69,11 @@ class MUFJBank(IWebSite):
                 By.XPATH, "/html/body/div/header/nav/div[2]/a[2]"
             )
             button.click()
-            self.__isLogin = False
+            self.__is_login = False
             # 待機
             time.sleep(3)
 
-    def get_account(self, account_code: str) -> dict:
+    def get_account_dic(self, account_code: str) -> dict:
         """口座情報を取得する
 
         Args:
@@ -82,7 +82,7 @@ class MUFJBank(IWebSite):
         Returns:
             dict: 口座情報
         """
-        if not self.__isLogin:
+        if not self.__is_login:
             self.login()
 
         driver = SeleniumLauncher()

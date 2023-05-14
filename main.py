@@ -30,7 +30,7 @@ try:
         website = container.resolve(site_code)
         website.login()
         for account_code in account_codes:
-            account_info_dic = website.get_account_info_dic(account_code)
+            account_info_dic = website.get_account(account_code)
             account_info_list.append(account_info_dic)
         website.logout()
 
@@ -47,11 +47,24 @@ try:
     googlespreadsheet.write_fundinfolist(settings.FUNDINFO_SHEETNAME, fundinfolist)
     files = file.get_files(settings.CSV_DIR)
     # 1件しか取得しない想定
-    filepath = os.path.join(settings.CSV_DIR, files[0])
-    googlespreadsheet.import_totalreturn_csv(
-        settings.IMPORT_RETURN_CSV_SHEETNAME, filepath
-    )
-    file.move_file(filepath, settings.IMPORTED_FILE_DIR)
+    if len(files) == 0:
+        print(
+            "No total return file : {0:%Y/%m/%d %H:%M:%S}".format(
+                datetime.datetime.now()
+            )
+        )
+    elif len(files) > 1:
+        print(
+            "Many total return files : {0:%Y/%m/%d %H:%M:%S}".format(
+                datetime.datetime.now()
+            )
+        )
+    else:
+        filepath = os.path.join(settings.CSV_DIR, files[0])
+        googlespreadsheet.import_totalreturn_csv(
+            settings.IMPORT_RETURN_CSV_SHEETNAME, filepath
+        )
+        file.move_file(filepath, settings.IMPORTED_FILE_DIR)
     print("END-Success : {0:%Y/%m/%d %H:%M:%S}".format(datetime.datetime.now()))
 except KeyboardInterrupt:
     print("KeyboardInterruptException")

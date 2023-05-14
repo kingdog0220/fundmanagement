@@ -9,7 +9,7 @@ class IWebSite(metaclass=ABCMeta):
         raise NotImplementedError
 
     @abstractmethod
-    def get_account_info_dic(self, account_code: str) -> dict:
+    def get_account(self, account_code: str) -> dict:
         """口座情報を取得する
 
         Args:

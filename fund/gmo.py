@@ -16,18 +16,10 @@ class GMO(IWebSite):
 
     __apiKey = settings.GMO_API_KEY
     __secretKey = settings.GMO_API_SECRET
-    __timestamp = "{0}000".format(int(time.mktime(datetime.datetime.now().timetuple())))
+
     __method = "GET"
     __endPoint = "https://api.coin.z.com/private"
     __path = "/v1/account/assets"
-
-    __text = __timestamp + __method + __path
-    __sign = hmac.new(
-        bytes(__secretKey.encode("ascii")),  # type: ignore
-        bytes(__text.encode("ascii")),
-        hashlib.sha256,
-    ).hexdigest()
-    __headers = {"API-KEY": __apiKey, "API-TIMESTAMP": __timestamp, "API-SIGN": __sign}
 
     def __init__(self):
         self.__data = {}
@@ -36,7 +28,7 @@ class GMO(IWebSite):
         """サイトにログインする"""
         pass
 
-    def get_account_info_dic(self, account_code: str) -> dict:
+    def get_account(self, account_code: str) -> dict:
         """口座情報を取得する
 
         Args:
@@ -48,6 +40,16 @@ class GMO(IWebSite):
         # APIの実行は最初の1回だけ
         if not self.__data:
             self.__data = self.get_assets()
+            if self.__data["status"] != 0:
+                messages = self.__data["messages"]
+                print(
+                    "error-GMO get_assets {0}, {1} : {2:%Y/%m/%d %H:%M:%S}".format(
+                        messages[0]["message_code"],
+                        messages[0]["message_string"],
+                        datetime.datetime.now(),
+                    )
+                )
+                return {}
         # JSONなのでいったん文字列で受ける
         amount = ""
         available = ""
@@ -79,7 +81,21 @@ class GMO(IWebSite):
         Returns:
             dict: 資産残高
         """
-        res = requests.get(self.__endPoint + self.__path, headers=self.__headers)
+        timestamp = "{0}000".format(
+            int(time.mktime(datetime.datetime.now().timetuple()))
+        )
+        text = timestamp + self.__method + self.__path
+        sign = hmac.new(
+            bytes(self.__secretKey.encode("ascii")),  # type: ignore
+            bytes(text.encode("ascii")),
+            hashlib.sha256,
+        ).hexdigest()
+        headers = {
+            "API-KEY": self.__apiKey,
+            "API-TIMESTAMP": timestamp,
+            "API-SIGN": sign,
+        }
+        res = requests.get(self.__endPoint + self.__path, headers=headers)
         return res.json()
 
     def calc_amount(self, amount: str, conversionRate: str) -> int:
