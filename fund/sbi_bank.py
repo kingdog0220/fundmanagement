@@ -144,7 +144,14 @@ class SBIBankNormalAccount(IAccount):
             )
             element.click()
         # 残高一覧のページ
-        wait.until(EC.presence_of_element_located((By.CLASS_NAME, "m-zandaka-date")))
+        wait.until(
+            EC.presence_of_element_located(
+                (
+                    By.XPATH,
+                    "/html/body/app/div[1]/ng-component/div/main/ng-component/section[1]",
+                )
+            )
+        )
         amount = driver.find_element(
             By.XPATH,
             "/html/body/app/div[1]/ng-component/div/main/ng-component/section[1]/div/ul/li[1]/h2/a/span[1]/span[1]",
@@ -182,7 +189,14 @@ class SBIBankFXAccount(IAccount):
             )
             element.click()
         # 残高一覧のページ
-        wait.until(EC.presence_of_element_located((By.CLASS_NAME, "m-zandaka-date")))
+        wait.until(
+            EC.presence_of_element_located(
+                (
+                    By.XPATH,
+                    "/html/body/app/div[1]/ng-component/div/main/ng-component/section[1]",
+                )
+            )
+        )
         amount = driver.find_element(
             By.XPATH,
             "/html/body/app/div[1]/ng-component/div/main/ng-component/section[1]/div/ul/li[3]/h2/a/span[1]/span[1]",
