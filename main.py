@@ -27,9 +27,11 @@ try:
     }
     account_info_list = []
     for site_code, account_codes in website_dic.items():
+        print("Website:{0}".format(site_code))
         website = container.resolve(site_code)
         website.login()
         for account_code in account_codes:
+            print("Account:{0}".format(account_code))
             account_info_dic = website.get_account(account_code)
             account_info_list.append(account_info_dic)
         website.logout()

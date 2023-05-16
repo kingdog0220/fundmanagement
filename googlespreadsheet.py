@@ -60,8 +60,9 @@ class GoogleSpreadSheet:
         """
         worksheet = self.__workbook.worksheet(sheetname)
         if worksheet is None:
-            raise ValueError("error-sheetname is None.")
+            raise ValueError("error-write_account_info sheetname is None.")
 
+        print("Write Account:{0}".format(account_info_dic[settings.ACCOUNT_CODE]))
         cell = worksheet.find(account_info_dic[settings.ACCOUNT_CODE])
         if cell is None:
             return
@@ -89,10 +90,11 @@ class GoogleSpreadSheet:
         """
         worksheet = self.__workbook.worksheet(sheetname)
         if worksheet is None:
-            raise ValueError("error-sheetname is None.")
+            raise ValueError("error-write_fundinfolist sheetname is None.")
 
         currentRow = 2
         for fund in fund_info_list:
+            print("Write Fund:{0}".format(fund.name))
             # linterがアホなので
             cell_list = worksheet.range(currentRow, self.NAME + 1, currentRow, self.BEFORE_ASEETS + 1)  # type: ignore
 
@@ -126,6 +128,7 @@ class GoogleSpreadSheet:
             params={"valueInputOption": "USER_ENTERED"},
             body={"values": list(csv.reader(open(filepath, encoding=encode)))},
         )
+        print("SUCCESS-import_totalreturn_csv")
 
     def convert_to_float(self, value: str) -> float:
         """文字列をfloatに変換する
@@ -144,4 +147,6 @@ class GoogleSpreadSheet:
         try:
             return float(value.replace(",", ""))
         except ValueError:
-            raise ValueError("error-convert_to_float method is ValueError")
+            raise ValueError(
+                "error-convert_to_float method is ValueError value:{0}".format(value)
+            )
