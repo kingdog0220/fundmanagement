@@ -116,4 +116,8 @@ class GMO(IWebSite):
             num_conversionRate = float(conversionRate)
             return int(round(num_amount * num_conversionRate, 0))
         except ValueError:
-            raise ValueError("error-calc_amount method is ValueError")
+            raise ValueError(
+                "error-calc_amount method is ValueError amount:{0} conversionRate:{1}".format(
+                    amount, conversionRate
+                )
+            )

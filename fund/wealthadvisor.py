@@ -27,6 +27,7 @@ class WealthAdvisor:
         driver = SeleniumLauncher()
         fundinfolist = []
         for url in url_list:
+            print("FundInfo:{0}".format(url))
             driver.get(url)
             wait = WebDriverWait(driver, 10)
             wait.until(
@@ -77,7 +78,7 @@ class WealthAdvisor:
         element = scrapebs.select_one(".fundnamea")
         name = element.select_one("h1")
         if name is None:
-            raise ValueError("error-cssselector is None")
+            raise ValueError("error-get_name cssselector is None")
         name = name.text.strip()
         return name
 
@@ -200,4 +201,6 @@ class WealthAdvisor:
             new_value = int(new_str_value) / 100
             return round(float(new_value), 2)
         except ValueError:
-            raise ValueError("error-convert_to_billion method is ValueError")
+            raise ValueError(
+                "error-convert_to_billion method is ValueError value:{0}".format(value)
+            )

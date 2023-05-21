@@ -43,6 +43,8 @@ class ScrapeBeautifulSoup:
 
         element = self.__parsedhtml.select_one(cssselector)
         if element is None:
-            raise ValueError("error-cssselector is None")
+            raise ValueError(
+                "error-select_one cssselector:{0} is None".format(cssselector)
+            )
 
         return element

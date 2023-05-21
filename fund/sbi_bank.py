@@ -81,7 +81,9 @@ class SBIBank(IWebSite):
             self.login()
         self.create_account_instance(account_code)
         if self.__account_instance is None:
-            raise ValueError("error-SBIBank account instance is None")
+            raise ValueError(
+                "error-SBIBank account instance {0} is None".format(account_code)
+            )
         account_info_dic = self.__account_instance.get_account_dic()
         return account_info_dic
 
