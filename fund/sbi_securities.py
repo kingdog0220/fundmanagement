@@ -48,6 +48,17 @@ class SBISecurities(IWebSite):
         login_button.click()
 
         # とりあえず待機
+        time.sleep(3)
+        wait.until(
+            EC.presence_of_element_located(
+                (By.XPATH, "//*[@id=" + '"navi01P"' + "]/ul/li[1]/a/img")
+            )
+        )
+        home_button = driver.find_element(
+            By.XPATH, "//*[@id=" + '"navi01P"' + "]/ul/li[1]/a/img"
+        )
+        home_button.click()
+
         wait.until(
             EC.presence_of_element_located(
                 (By.XPATH, "//*[@id=" + '"my-assets-button"' + "]/img")
