@@ -94,8 +94,11 @@ class DCBank(IWebSite):
 
         driver = SeleniumLauncher()
         wait = WebDriverWait(driver, 10)
+        # とりあえず待機
+        time.sleep(3)
         # 適当な位置をクリックしてお知らせを消す
         ActionChains(driver).move_by_offset(1, 1).click().perform()
+        time.sleep(3)
         wait.until(EC.presence_of_element_located((By.ID, "DB_EVALUTION_KINGAKU_3")))
         amount = driver.find_element(By.ID, "DB_EVALUTION_KINGAKU_3").text
         # データの設定
