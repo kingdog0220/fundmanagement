@@ -1,14 +1,14 @@
 from injector import Injector
 
 import settings
-from fund.dc import DCBank
-from fund.gmo import GMO
-from fund.iwebsite import IWebSite
-from fund.mufj import MUFJBank
-from fund.rakuten_bank import RakutenBank
-from fund.rakuten_securities import RakutenSecurities
-from fund.sbi_bank import SBIBank
-from fund.sbi_securities import SBISecurities
+from fund.website.common.iwebsite import IWebSite
+from fund.website.dc import DCBank
+from fund.website.gmo import GMO
+from fund.website.mufj import MUFJBank
+from fund.website.rakuten_bank import RakutenBank
+from fund.website.rakuten_securities import RakutenSecurities
+from fund.website.sbi_bank import SBIBank
+from fund.website.sbi_securities import SBISecurities
 
 
 class WebSiteDIContainer:

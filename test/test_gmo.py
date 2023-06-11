@@ -2,9 +2,9 @@ import json
 import os
 import unittest
 
-from fund.gmo import GMO
+from fund.website.gmo import GMO
 
-TEST_DIR = r"D:\src\fundmanagement\test\test_case\gmo"
+TEST_DIR = r"D:\src\fundmanagement\test\test_data\gmo"
 
 
 class TestGMO(unittest.TestCase):

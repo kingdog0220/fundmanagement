@@ -48,8 +48,8 @@ IMPORT_RETURN_CSV_SHEETNAME = "投資信託リターン"
 TOTAL_ASSET_SHEETNAME = "総資産"
 
 # ファイル操作
-CSV_DIR = r".\fund\rakuten"
-IMPORTED_FILE_DIR = r".\fund\rakuten\old"
+CSV_DIR = r".\fund\website\rakuten_securities"
+IMPORTED_FILE_DIR = r".\fund\website\rakuten_securities\old"
 
 # URL
 MUFJ_LOGIN_URL = (

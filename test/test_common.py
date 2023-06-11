@@ -3,10 +3,10 @@ import shutil
 import unittest
 
 import file
-from fund.wealthadvisor import WealthAdvisor
+from fund.website.wealthadvisor import WealthAdvisor
 
-TEST_DIR = r"D:\src\fundmanagement\test\test_case\rakuten"
-TEST_DIR_OLD = r"D:\src\fundmanagement\test\test_case\rakuten\old"
+TEST_DIR = r"D:\src\fundmanagement\test\test_data\rakuten_securities"
+TEST_DIR_OLD = r"D:\src\fundmanagement\test\test_data\rakuten_securities\old"
 FILE_NAME = "TotalReturn_test.csv"
 
 

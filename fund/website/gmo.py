@@ -6,7 +6,7 @@ import time
 import requests
 
 import settings
-from fund.iwebsite import IWebSite
+from fund.website.common.iwebsite import IWebSite
 
 
 class GMO(IWebSite):

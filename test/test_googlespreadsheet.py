@@ -1,7 +1,7 @@
 import unittest
 
-from fund.fundinfo import FundInfo
-from googlespreadsheet import GoogleSpreadSheet
+from application.googlespreadsheet import GoogleSpreadSheet
+from fund.website.common.fundinfo import FundInfo
 
 
 class TestGoogleSpreadSheet(unittest.TestCase):
@@ -65,7 +65,7 @@ class TestGoogleSpreadSheet(unittest.TestCase):
         googlespreadsheet = GoogleSpreadSheet()
         googlespreadsheet.import_totalreturn_csv(
             "投資信託リターンテスト",
-            r"D:\src\fundmanagement\test\test_case\rakuten\TotalReturn_test.csv",
+            r"D:\src\fundmanagement\test\test_data\rakuten_securities\TotalReturn_test.csv",
             "shift-jis",
         )
 
