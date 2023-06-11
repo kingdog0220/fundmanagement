@@ -5,8 +5,8 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler
 import requests
 
 import settings
-from fund.wealthadvisor import WealthAdvisor
-from scrapebeautifulsoup import ScrapeBeautifulSoup as scrapebeautifulsoup
+from application.scrapebeautifulsoup import ScrapeBeautifulSoup as scrapebeautifulsoup
+from fund.website.wealthadvisor import WealthAdvisor
 
 HOST = "localhost"
 PORT = 8888
@@ -34,7 +34,7 @@ class TestWebScraping(unittest.TestCase):
     def setUp(self):
         # Use unittest setUp method.
         self.server = StoppableHTTPServer((HOST, PORT), SimpleHTTPRequestHandler)
-        self.url = "http://{}:{}/test/test_case/test.html".format(HOST, PORT)
+        self.url = "http://{}:{}/test/test_data/test.html".format(HOST, PORT)
         self.thread = threading.Thread(None, self.server.run)
         self.thread.start()
 

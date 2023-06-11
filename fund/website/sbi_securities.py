@@ -6,9 +6,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
 import settings
-from fund.iaccount import IAccount
-from fund.iwebsite import IWebSite
-from seleniumlauncher import SeleniumLauncher
+from application.seleniumlauncher import SeleniumLauncher
+from fund.website.common.iaccount import IAccount
+from fund.website.common.iwebsite import IWebSite
 
 
 class SBISecurities(IWebSite):

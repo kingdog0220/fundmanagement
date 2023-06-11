@@ -5,7 +5,7 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
 import settings
-from fund.fundinfo import FundInfo
+from fund.website.common.fundinfo import FundInfo
 
 
 class GoogleSpreadSheet:

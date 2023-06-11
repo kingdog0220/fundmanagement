@@ -3,9 +3,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
 import settings
-from fund.fundinfo import FundInfo
-from scrapebeautifulsoup import ScrapeBeautifulSoup as scrapebeautifulsoup
-from seleniumlauncher import SeleniumLauncher
+from application.scrapebeautifulsoup import ScrapeBeautifulSoup as scrapebeautifulsoup
+from application.seleniumlauncher import SeleniumLauncher
+from fund.website.common.fundinfo import FundInfo
 
 
 class WealthAdvisor:

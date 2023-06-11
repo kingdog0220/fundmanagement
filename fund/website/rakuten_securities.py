@@ -8,8 +8,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
 import settings
-from fund.iwebsite import IWebSite
-from seleniumlauncher import SeleniumLauncher
+from application.seleniumlauncher import SeleniumLauncher
+from fund.website.common.website import IWebSite
 
 
 class RakutenSecurities(IWebSite):

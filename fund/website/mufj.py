@@ -1,19 +1,17 @@
 import datetime
 import time
 
-from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
 import settings
-from fund.iwebsite import IWebSite
-from seleniumlauncher import SeleniumLauncher
+from application.scrapebeautifulsoup import ScrapeBeautifulSoup as scrapebeautifulsoup
+from application.seleniumlauncher import SeleniumLauncher
+from fund.website.common.iwebsite import IWebSite
 
 
-class DCBank(IWebSite):
-    """DC(りそな銀行)のサイト"""
-
+class MUFJBank(IWebSite):
     # ログイン状態を表すフラグ
     __is_login: bool
 
@@ -29,31 +27,20 @@ class DCBank(IWebSite):
         if self.__is_login:
             return
 
-        url = settings.DC_LOGIN_URL
+        url = settings.MUFJ_LOGIN_URL
         driver = SeleniumLauncher()
         driver.get(url)
         wait = WebDriverWait(driver, 10)
-        wait.until(EC.presence_of_element_located((By.ID, "navTop")))
-        # ユーザー名とパスワードを入力
-        login_id = driver.find_element(
-            By.XPATH,
-            "//*[@id=" + '"navTop"' + "]/div[2]/div[2]/div/div/form/p[1]/input",
-        )
-        password = driver.find_element(
-            By.XPATH,
-            "//*[@id=" + '"navTop"' + "]/div[2]/div[2]/div/div/form/p[2]/input",
-        )
+        wait.until(EC.presence_of_element_located((By.ID, "tx-contract-number")))
+        # ログイン情報を入力
+        contract_number = driver.find_element(By.ID, "tx-contract-number")
+        password = driver.find_element(By.ID, "tx-ib-password")
 
-        login_id.send_keys(settings.DC_LOGIN_ID)
-        password.send_keys(settings.DC_LOGIN_PASSWORD)
+        contract_number.send_keys(settings.MUFJ_CONTRACT_NUMBER)
+        password.send_keys(settings.MUFJ_PASSWORD)
 
-        login_button = driver.find_element(
-            By.XPATH,
-            "//*[@id=" + '"navTop"' + "]/div[2]/div[2]/div/div/form/p[3]/input",
-        )
+        login_button = driver.find_element(By.CLASS_NAME, "gonext")
         login_button.click()
-        # 待機
-        time.sleep(3)
         self.__is_login = True
 
     def get_account(self, account_code: str) -> dict:
@@ -72,11 +59,17 @@ class DCBank(IWebSite):
         """ログアウトする"""
         if self.__is_login:
             driver = SeleniumLauncher()
+            wait = WebDriverWait(driver, 10)
+            wait.until(
+                EC.presence_of_element_located(
+                    (By.XPATH, "/html/body/div/header/nav/div[2]/a[2]")
+                )
+            )
             button = driver.find_element(
-                By.XPATH,
-                "//*[@id=" + '"headerGlobal"' + "]/div[2]/ul/li[3]/a",
+                By.XPATH, "/html/body/div/header/nav/div[2]/a[2]"
             )
             button.click()
+            self.__is_login = False
             # 待機
             time.sleep(3)
 
@@ -94,17 +87,15 @@ class DCBank(IWebSite):
 
         driver = SeleniumLauncher()
         wait = WebDriverWait(driver, 10)
-        # とりあえず待機
-        time.sleep(3)
-        # 適当な位置をクリックしてお知らせを消す
-        ActionChains(driver).move_by_offset(1, 1).click().perform()
-        time.sleep(3)
-        wait.until(EC.presence_of_element_located((By.ID, "DB_EVALUTION_KINGAKU_3")))
-        amount = driver.find_element(By.ID, "DB_EVALUTION_KINGAKU_3").text
+        wait.until(
+            EC.presence_of_element_located((By.CLASS_NAME, "total-amount-unmask"))
+        )
+        scrapebs = scrapebeautifulsoup(driver.page_source)
+        amount = scrapebs.select_one(".total-amount-unmask")
         # データの設定
         account_info_dic = {
             settings.ACCOUNT_CODE: account_code,
-            settings.AMOUNT: amount,
+            settings.AMOUNT: amount.text,
             settings.UPDATE_DATE: "{0:%Y/%m/%d}".format(datetime.datetime.now()),
         }
         return account_info_dic

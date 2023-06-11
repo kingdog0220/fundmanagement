@@ -3,10 +3,10 @@ import os
 
 import file
 import settings
-from fund.wealthadvisor import WealthAdvisor
-from fund.website import WebSiteDIContainer
-from googlespreadsheet import GoogleSpreadSheet
-from seleniumlauncher import SeleniumLauncher as seleniumlauncher
+from application.googlespreadsheet import GoogleSpreadSheet
+from application.seleniumlauncher import SeleniumLauncher as seleniumlauncher
+from fund.website.common.webcontainer import WebSiteDIContainer
+from fund.website.wealthadvisor import WealthAdvisor
 
 # main
 try:
