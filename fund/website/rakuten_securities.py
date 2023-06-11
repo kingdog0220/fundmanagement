@@ -9,7 +9,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 import settings
 from application.seleniumlauncher import SeleniumLauncher
-from fund.website.common.website import IWebSite
+from fund.website.common.iwebsite import IWebSite
 
 
 class RakutenSecurities(IWebSite):
