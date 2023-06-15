@@ -18,6 +18,24 @@ class TestLogin(unittest.TestCase):
         with open(dir, mode="wt", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
 
+    def test_rks(self):
+        container = WebSiteDIContainer()
+        website = container.resolve("RKS")
+        data = website.get_account("RKS_ACC")
+        website.logout()
+        dir = os.path.join(TEST_DIR, "test_rks.json")
+        with open(dir, mode="wt", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+
+    def test_rkb(self):
+        container = WebSiteDIContainer()
+        website = container.resolve("RKB")
+        data = website.get_account("RKB_ACC")
+        website.logout()
+        dir = os.path.join(TEST_DIR, "test_rkb.json")
+        with open(dir, mode="wt", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+
     def tearDown(self):
         if seleniumlauncher.driver:
             seleniumlauncher.driver.quit
