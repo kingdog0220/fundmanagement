@@ -62,6 +62,15 @@ class TestLogin(unittest.TestCase):
             json.dump(data2, f, ensure_ascii=False, indent=2)
         website.logout()
 
+    def test_dc(self):
+        container = WebSiteDIContainer()
+        website = container.resolve("DC")
+        data = website.get_account("DC_ACC")
+        website.logout()
+        dir = os.path.join(TEST_DIR, "test_dc.json")
+        with open(dir, mode="wt", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+
     def tearDown(self):
         if seleniumlauncher.driver:
             seleniumlauncher.driver.quit
