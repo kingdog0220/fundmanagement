@@ -36,6 +36,32 @@ class TestLogin(unittest.TestCase):
         with open(dir, mode="wt", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
 
+    def test_sbis(self):
+        container = WebSiteDIContainer()
+        website = container.resolve("SBIS")
+        data = website.get_account("SBISMMF_ACC")
+        dir = os.path.join(TEST_DIR, "test_sbis_mmf.json")
+        with open(dir, mode="wt", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+        data2 = website.get_account("SBISFX_ACC")
+        dir = os.path.join(TEST_DIR, "test_sbis_fx.json")
+        with open(dir, mode="wt", encoding="utf-8") as f:
+            json.dump(data2, f, ensure_ascii=False, indent=2)
+        website.logout()
+
+    def test_sbib(self):
+        container = WebSiteDIContainer()
+        website = container.resolve("SBIB")
+        data = website.get_account("SBIB_ACC")
+        dir = os.path.join(TEST_DIR, "test_sbib.json")
+        with open(dir, mode="wt", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+        data2 = website.get_account("SBIBFX_ACC")
+        dir = os.path.join(TEST_DIR, "test_sbib_fx.json")
+        with open(dir, mode="wt", encoding="utf-8") as f:
+            json.dump(data2, f, ensure_ascii=False, indent=2)
+        website.logout()
+
     def tearDown(self):
         if seleniumlauncher.driver:
             seleniumlauncher.driver.quit
