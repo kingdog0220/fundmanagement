@@ -27,7 +27,7 @@ class RakutenBank(IWebSite):
         if self.__is_login:
             return
 
-        url = settings.RAKUTEN_BANK_LOGIN_URL
+        url = str(settings.RAKUTEN_BANK_LOGIN_URL)
         driver = SeleniumLauncher()
         driver.get(url)
         wait = WebDriverWait(driver, 10)

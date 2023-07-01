@@ -18,10 +18,10 @@ class WealthAdvisor:
             list: 投資信託の情報リスト
         """
         url_list = [
-            settings.NISSAY_TOPIX_URL,
-            settings.TAWARA_DEVELOPED_COUNTRY_URL,
-            settings.E_MAXIS_SLIM_EMERGING_URL,
-            settings.E_MAXIS_SLIM_SP500_URL,
+            str(settings.NISSAY_TOPIX_URL),
+            str(settings.TAWARA_DEVELOPED_COUNTRY_URL),
+            str(settings.E_MAXIS_SLIM_EMERGING_URL),
+            str(settings.E_MAXIS_SLIM_SP500_URL),
         ]
 
         driver = SeleniumLauncher()
