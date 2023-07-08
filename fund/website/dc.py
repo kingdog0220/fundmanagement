@@ -29,7 +29,7 @@ class DCBank(IWebSite):
         if self.__is_login:
             return
 
-        url = settings.DC_LOGIN_URL
+        url = str(settings.DC_LOGIN_URL)
         driver = SeleniumLauncher()
         driver.get(url)
         wait = WebDriverWait(driver, 10)

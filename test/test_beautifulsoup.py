@@ -40,7 +40,7 @@ class TestWebScraping(unittest.TestCase):
 
     @unittest.skip("本番サイトの構成が変わったかもしれないときに実行")
     def test_get_html(self):
-        res = requests.get(settings.NISSAY_TOPIX_URL)
+        res = requests.get(str(settings.NISSAY_TOPIX_URL))
         scrapebs = scrapebeautifulsoup(res.content)
         if scrapebs.parsedhtml is None:
             print("Target URL is None.")

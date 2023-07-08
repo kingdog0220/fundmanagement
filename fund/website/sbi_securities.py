@@ -32,7 +32,7 @@ class SBISecurities(IWebSite):
         if self.__is_login:
             return
 
-        url = settings.SBI_LOGIN_URL
+        url = str(settings.SBI_LOGIN_URL)
         driver = SeleniumLauncher()
         driver.get(url)
         wait = WebDriverWait(driver, 10)

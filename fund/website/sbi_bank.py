@@ -32,7 +32,7 @@ class SBIBank(IWebSite):
         if self.__is_login:
             return
 
-        url = settings.SBI_BANK_URL
+        url = str(settings.SBI_BANK_URL)
         driver = SeleniumLauncher()
         driver.get(url)
         wait = WebDriverWait(driver, 10)

@@ -27,7 +27,7 @@ class MUFJBank(IWebSite):
         if self.__is_login:
             return
 
-        url = settings.MUFJ_LOGIN_URL
+        url = str(settings.MUFJ_LOGIN_URL)
         driver = SeleniumLauncher()
         driver.get(url)
         wait = WebDriverWait(driver, 10)
